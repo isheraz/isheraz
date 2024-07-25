@@ -1,14 +1,12 @@
-# Sheraz Ahmed - Founder 🌟
+# Sheraz Ahmed - Tech Enthusiast 🌟
 
 ## Contact Information
-- **Location:** 651 N Broad St Suite 201, Middletown, DE 19709, US
-- **Company:** Mind Maze Software LLC
 - **Email:** hi@isheraz.com
 - **LinkedIn:** [linkedin.com/in/isheraz](https://www.linkedin.com/in/isheraz)
 - **Phone:** +1 302-329-4594, +92-312-450-1070
 
 ## Professional Summary
-- **Role:** Solutions Architect and Founder 🏗️
+- **Role:** Solutions Architect and Full Stack Engineer 🏗️
 - **Specialization:** Software Engineering, Project Management, Technological Innovation 🔍
 
 ## Education
