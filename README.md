@@ -29,10 +29,13 @@
 
 ## Professional Experience
 
-### Founder - Mind Maze (Founded in September 2023) 🚀
-- **Mission:** Empower businesses with innovative and cost-effective tech solutions.
-- **Vision:** Be the global leader in tech development and client-centric service.
-- **Achievements:** Addressed the industry gap where project estimates often exceeded actual needs by up to 30%.
+### Engineering Manager - Mind Maze (Founded in September 2023) 
+- Product Excellence: From idea to launch, I oversee our products, ensuring they're not just innovative but resonate with our users.
+- Business Growth: I'm the face of Mind Maze, connecting with partners and clients, turning conversations into opportunities.
+- Tech Innovation: Technology is our playground. I ensure we're not just playing the game but changing it.
+- Financial Wisdom: Beyond numbers, it's about sustainable growth and smart investments that keep us thriving.
+- Ethical Leadership: I uphold our standards, ensuring we're not just compliant but setting the bar for integrity.
+
 
 ### InvoZone - Solutions Architect and Product Manager 🛠️
 - Led project planning and sprint planning.
