@@ -29,7 +29,9 @@
 
 ## Professional Experience
 
-### Engineering Manager - Mind Maze (Founded in September 2023) 
+### Solutions Architect - Sociabletech.com.au (Current) 
+
+### Engineering Manager - withmindmaze.com (Shelved) 
 - Product Excellence: From idea to launch, I oversee our products, ensuring they're not just innovative but resonate with our users.
 - Business Growth: I'm the face of Mind Maze, connecting with partners and clients, turning conversations into opportunities.
 - Tech Innovation: Technology is our playground. I ensure we're not just playing the game but changing it.
