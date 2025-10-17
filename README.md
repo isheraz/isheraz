@@ -1,7 +1,7 @@
 # Sheraz Ahmed - Tech Enthusiast 🌟
 
 ## Contact Information
-- **Email:** hi@isheraz.com
+- **Email:** sherazahmed93@gmail.com
 - **LinkedIn:** [linkedin.com/in/isheraz](https://www.linkedin.com/in/isheraz)
 - **Phone:** +1 302-329-4594, +92-312-450-1070
 
