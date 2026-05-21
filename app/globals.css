@@ -987,12 +987,35 @@ section + section { padding-top: 0; }
   font-weight: 500;
 }
 .gh-head .gh-num small { color: var(--fg-3); font-size: 14px; letter-spacing: 0; }
+.gh-chart-wrapper {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 6px;
+  overflow: hidden;
+}
+.gh-chart-scroll {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) var(--bg-subtle);
+}
+.gh-chart-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+.gh-chart-scroll::-webkit-scrollbar-track {
+  background: var(--bg-subtle);
+}
+.gh-chart-scroll::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 3px;
+}
+.gh-chart-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--fg-4);
+}
 .gh-grid {
   display: grid;
   grid-auto-flow: column;
   grid-template-rows: repeat(7, 1fr);
   gap: 3px;
-  overflow-x: auto;
   padding-bottom: 6px;
 }
 .gh-cell {

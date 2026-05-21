@@ -33,11 +33,11 @@ export function GitHubSection() {
               </div>
             </div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '20px 1fr', gap: 6 }}>
+          <div className="gh-chart-wrapper">
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', paddingTop: 18, paddingBottom: 4, fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--fg-4)' }}>
               {dayLabels.map(day => <span key={day}>{day}</span>)}
             </div>
-            <div>
+            <div className="gh-chart-scroll">
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--fg-4)', marginBottom: 6, paddingLeft: 4 }}>
                 {months.map(month => <span key={month}>{month}</span>)}
               </div>
