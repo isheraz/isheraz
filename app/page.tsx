@@ -11,13 +11,13 @@ import { Education } from '@/components/education'
 import { GitHubSection } from '@/components/github'
 import { Newsletter } from '@/components/newsletter'
 import { About } from '@/components/about'
-import { useTweaks, TweaksPanel, TweakSection, TweakToggle, TweakColor, TweakRadio, TweakSelect } from '@/components/tweaks-panel'
+import { useTweaks } from '@/components/tweaks-panel'
 
 const TWEAK_DEFAULTS = {
-  dark: true,
+  dark: false,
   accent: '#8ec052',
-  density: 'regular',
-  font: 'geist',
+  density: 'compact',
+  font: 'spaceGrotesk',
   heroVariant: 'default'
 }
 
@@ -112,52 +112,6 @@ export default function App() {
         <div className="reveal"><About /></div>
       </main>
       <Footer />
-
-      <TweaksPanel title="Tweaks">
-        <TweakSection label="Theme">
-          <TweakToggle label="Dark mode" value={t.dark} onChange={(v: any) => setTweak('dark', v)} />
-          <TweakColor
-            label="Accent"
-            value={t.accent}
-            options={['#8ec052', '#ff5b1f', '#2563eb', '#a855f7', '#f6f5f1']}
-            onChange={(v: any) => setTweak('accent', v)}
-          />
-        </TweakSection>
-        <TweakSection label="Layout">
-          <TweakRadio
-            label="Density"
-            value={t.density}
-            options={[
-              { value: 'compact', label: 'Compact' },
-              { value: 'regular', label: 'Regular' },
-              { value: 'airy', label: 'Airy' },
-            ]}
-            onChange={(v: any) => setTweak('density', v)}
-          />
-          <TweakRadio
-            label="Hero layout"
-            value={t.heroVariant}
-            options={[
-              { value: 'default', label: 'Default' },
-              { value: 'split', label: 'Split' },
-              { value: 'centered', label: 'Center' },
-            ]}
-            onChange={(v: any) => setTweak('heroVariant', v)}
-          />
-        </TweakSection>
-        <TweakSection label="Type">
-          <TweakSelect
-            label="Font pairing"
-            value={t.font}
-            options={[
-              { value: 'geist', label: 'Geist + Geist Mono' },
-              { value: 'instrument', label: 'Instrument Sans + JetBrains' },
-              { value: 'spaceGrotesk', label: 'Space Grotesk + JetBrains' },
-            ]}
-            onChange={(v: any) => setTweak('font', v)}
-          />
-        </TweakSection>
-      </TweaksPanel>
     </>
   )
 }
