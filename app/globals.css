@@ -1848,18 +1848,24 @@ html { scroll-behavior: smooth; }
   transform-origin: bottom;
 }
 
-/* Wave animations: organic, multi-layer liquid motion */
+/* Wave animations: smooth, organic liquid motion */
 .loader-wave {
   fill: var(--accent);
-  filter: drop-shadow(0 -2px 4px rgba(0,0,0,0.08));
+  filter: drop-shadow(0 -1px 3px rgba(0,0,0,0.06));
 }
 
-.loader-wave-primary {
-  animation: wave-motion-primary 2.4s ease-out forwards;
+.loader-wave-1 {
+  animation: wave-1 2.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-.loader-wave-secondary {
-  animation: wave-motion-secondary 2.4s ease-out forwards;
+.loader-wave-2 {
+  animation: wave-2 2.4s cubic-bezier(0.33, 0.66, 0.66, 1) forwards;
+  animation-delay: 0.1s;
+}
+
+.loader-wave-3 {
+  animation: wave-3 2.4s cubic-bezier(0.42, 0.58, 0.58, 0.95) forwards;
+  animation-delay: 0.05s;
 }
 
 @keyframes liquid-fill {
@@ -1875,44 +1881,83 @@ html { scroll-behavior: smooth; }
   }
 }
 
-/* Primary wave: larger amplitude, slower horizontal movement */
-@keyframes wave-motion-primary {
+/* Wave 1: Primary - flows smoothly with gentle rolling motion */
+@keyframes wave-1 {
   0% {
-    d: path('M -40,138 Q 0,138 35,135 Q 70,138 105,135 Q 140,138 180,138 L 180,140 L -40,140 Z');
+    d: path('M 0,135 C 15,132 25,138 35,135 C 45,132 55,138 70,135 C 85,132 95,138 105,135 C 115,132 125,138 140,135 L 140,140 L 0,140 Z');
     opacity: 0;
   }
-  8% {
+  5% {
     opacity: 1;
   }
-  35% {
-    d: path('M -40,80 Q 0,72 35,78 Q 70,80 105,72 Q 140,80 180,80 L 180,140 L -40,140 Z');
+  20% {
+    d: path('M 0,95 C 15,90 25,100 35,95 C 45,90 55,100 70,95 C 85,90 95,100 105,95 C 115,90 125,100 140,95 L 140,140 L 0,140 Z');
   }
-  65% {
-    d: path('M -40,35 Q 0,28 35,32 Q 70,35 105,28 Q 140,35 180,35 L 180,140 L -40,140 Z');
+  40% {
+    d: path('M 0,60 C 15,55 25,65 35,60 C 45,55 55,65 70,60 C 85,55 95,65 105,60 C 115,55 125,65 140,60 L 140,140 L 0,140 Z');
+  }
+  60% {
+    d: path('M 0,35 C 15,30 25,40 35,35 C 45,30 55,40 70,35 C 85,30 95,40 105,35 C 115,30 125,40 140,35 L 140,140 L 0,140 Z');
+  }
+  80% {
+    d: path('M 0,15 C 15,10 25,20 35,15 C 45,10 55,20 70,15 C 85,10 95,20 105,15 C 115,10 125,20 140,15 L 140,140 L 0,140 Z');
   }
   100% {
-    d: path('M -40,8 Q 0,2 35,6 Q 70,8 105,2 Q 140,8 180,8 L 180,140 L -40,140 Z');
+    d: path('M 0,8 C 15,4 25,12 35,8 C 45,4 55,12 70,8 C 85,4 95,12 105,8 C 115,4 125,12 140,8 L 140,140 L 0,140 Z');
     opacity: 1;
   }
 }
 
-/* Secondary wave: smaller amplitude, faster, different phase */
-@keyframes wave-motion-secondary {
+/* Wave 2: Secondary - offset phase, different frequency */
+@keyframes wave-2 {
   0% {
-    d: path('M -40,138 Q 0,135 35,138 Q 70,135 105,138 Q 140,135 180,138 L 180,140 L -40,140 Z');
+    d: path('M 0,137 C 20,133 30,141 50,137 C 70,133 80,141 100,137 C 120,133 135,141 140,137 L 140,140 L 0,140 Z');
     opacity: 0;
   }
-  8% {
-    opacity: 0.4;
+  5% {
+    opacity: 0.35;
   }
-  25% {
-    d: path('M -40,85 Q 0,82 35,85 Q 70,82 105,85 Q 140,82 180,85 L 180,140 L -40,140 Z');
+  18% {
+    d: path('M 0,98 C 20,94 30,102 50,98 C 70,94 80,102 100,98 C 120,94 135,102 140,98 L 140,140 L 0,140 Z');
+  }
+  35% {
+    d: path('M 0,65 C 20,61 30,69 50,65 C 70,61 80,69 100,65 C 120,61 135,69 140,65 L 140,140 L 0,140 Z');
   }
   55% {
-    d: path('M -40,38 Q 0,35 35,38 Q 70,35 105,38 Q 140,35 180,38 L 180,140 L -40,140 Z');
+    d: path('M 0,38 C 20,34 30,42 50,38 C 70,34 80,42 100,38 C 120,34 135,42 140,38 L 140,140 L 0,140 Z');
+  }
+  75% {
+    d: path('M 0,18 C 20,14 30,22 50,18 C 70,14 80,22 100,18 C 120,14 135,22 140,18 L 140,140 L 0,140 Z');
   }
   100% {
-    d: path('M -40,10 Q 0,7 35,10 Q 70,7 105,10 Q 140,7 180,10 L 180,140 L -40,140 Z');
-    opacity: 0.4;
+    d: path('M 0,10 C 20,6 30,14 50,10 C 70,6 80,14 100,10 C 120,6 135,14 140,10 L 140,140 L 0,140 Z');
+    opacity: 0.35;
+  }
+}
+
+/* Wave 3: Tertiary - fast, subtle turbulence layer */
+@keyframes wave-3 {
+  0% {
+    d: path('M 0,136 C 25,132 35,140 60,136 C 85,132 95,140 120,136 C 130,135 140,137 140,136 L 140,140 L 0,140 Z');
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.2;
+  }
+  22% {
+    d: path('M 0,92 C 25,88 35,96 60,92 C 85,88 95,96 120,92 C 130,91 140,93 140,92 L 140,140 L 0,140 Z');
+  }
+  42% {
+    d: path('M 0,58 C 25,54 35,62 60,58 C 85,54 95,62 120,58 C 130,57 140,59 140,58 L 140,140 L 0,140 Z');
+  }
+  62% {
+    d: path('M 0,32 C 25,28 35,36 60,32 C 85,28 95,36 120,32 C 130,31 140,33 140,32 L 140,140 L 0,140 Z');
+  }
+  85% {
+    d: path('M 0,12 C 25,8 35,16 60,12 C 85,8 95,16 120,12 C 130,11 140,13 140,12 L 140,140 L 0,140 Z');
+  }
+  100% {
+    d: path('M 0,6 C 25,2 35,10 60,6 C 85,2 95,10 120,6 C 130,5 140,7 140,6 L 140,140 L 0,140 Z');
+    opacity: 0.2;
   }
 }

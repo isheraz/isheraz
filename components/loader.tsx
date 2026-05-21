@@ -22,19 +22,27 @@ export function Loader() {
             {/* Animated liquid rectangle */}
             <rect className="loader-liquid" x="2" y="2" width="136" height="136" />
 
-            {/* Primary wave - larger, slower */}
+            {/* Wave layer 1 - primary wave with smooth sine motion */}
             <path
-              className="loader-wave loader-wave-primary"
-              d="M 0,70 Q 35,60 70,70 T 140,70 L 140,140 L 0,140 Z"
+              className="loader-wave loader-wave-1"
+              d="M 0,70 C 15,65 25,75 35,70 C 45,65 55,75 70,70 C 85,65 95,75 105,70 C 115,65 125,75 140,70 L 140,140 L 0,140 Z"
               fill="currentColor"
             />
 
-            {/* Secondary wave - smaller, faster, offset phase */}
+            {/* Wave layer 2 - secondary wave offset and smoother */}
             <path
-              className="loader-wave loader-wave-secondary"
-              d="M 0,70 Q 35,65 70,70 T 140,70 L 140,140 L 0,140 Z"
+              className="loader-wave loader-wave-2"
+              d="M 0,72 C 20,68 30,76 50,72 C 70,68 80,76 100,72 C 120,68 135,76 140,72 L 140,140 L 0,140 Z"
               fill="currentColor"
-              opacity="0.4"
+              opacity="0.35"
+            />
+
+            {/* Wave layer 3 - tertiary wave for turbulence */}
+            <path
+              className="loader-wave loader-wave-3"
+              d="M 0,71 C 25,67 35,75 60,71 C 85,67 95,75 120,71 C 130,70 140,72 140,71 L 140,140 L 0,140 Z"
+              fill="currentColor"
+              opacity="0.2"
             />
           </g>
         </svg>
