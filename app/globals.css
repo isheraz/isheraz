@@ -1848,11 +1848,18 @@ html { scroll-behavior: smooth; }
   transform-origin: bottom;
 }
 
-/* Wave animation: oscillates horizontally and moves up with liquid */
+/* Wave animations: organic, multi-layer liquid motion */
 .loader-wave {
   fill: var(--accent);
-  animation: wave-motion 2.4s ease-out forwards;
   filter: drop-shadow(0 -2px 4px rgba(0,0,0,0.08));
+}
+
+.loader-wave-primary {
+  animation: wave-motion-primary 2.4s ease-out forwards;
+}
+
+.loader-wave-secondary {
+  animation: wave-motion-secondary 2.4s ease-out forwards;
 }
 
 @keyframes liquid-fill {
@@ -1868,22 +1875,44 @@ html { scroll-behavior: smooth; }
   }
 }
 
-@keyframes wave-motion {
+/* Primary wave: larger amplitude, slower horizontal movement */
+@keyframes wave-motion-primary {
   0% {
-    d: path('M 0,138 Q 35,138 70,138 T 140,138 L 140,140 L 0,140 Z');
+    d: path('M -40,138 Q 0,138 35,135 Q 70,138 105,135 Q 140,138 180,138 L 180,140 L -40,140 Z');
     opacity: 0;
   }
-  10% {
+  8% {
     opacity: 1;
   }
-  45% {
-    d: path('M 0,80 Q 35,70 70,80 T 140,80 L 140,140 L 0,140 Z');
+  35% {
+    d: path('M -40,80 Q 0,72 35,78 Q 70,80 105,72 Q 140,80 180,80 L 180,140 L -40,140 Z');
   }
-  90% {
-    d: path('M 0,10 Q 35,0 70,10 T 140,10 L 140,140 L 0,140 Z');
+  65% {
+    d: path('M -40,35 Q 0,28 35,32 Q 70,35 105,28 Q 140,35 180,35 L 180,140 L -40,140 Z');
   }
   100% {
-    d: path('M 0,10 Q 35,0 70,10 T 140,10 L 140,140 L 0,140 Z');
+    d: path('M -40,8 Q 0,2 35,6 Q 70,8 105,2 Q 140,8 180,8 L 180,140 L -40,140 Z');
     opacity: 1;
+  }
+}
+
+/* Secondary wave: smaller amplitude, faster, different phase */
+@keyframes wave-motion-secondary {
+  0% {
+    d: path('M -40,138 Q 0,135 35,138 Q 70,135 105,138 Q 140,135 180,138 L 180,140 L -40,140 Z');
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.4;
+  }
+  25% {
+    d: path('M -40,85 Q 0,82 35,85 Q 70,82 105,85 Q 140,82 180,85 L 180,140 L -40,140 Z');
+  }
+  55% {
+    d: path('M -40,38 Q 0,35 35,38 Q 70,35 105,38 Q 140,35 180,38 L 180,140 L -40,140 Z');
+  }
+  100% {
+    d: path('M -40,10 Q 0,7 35,10 Q 70,7 105,10 Q 140,7 180,10 L 180,140 L -40,140 Z');
+    opacity: 0.4;
   }
 }
