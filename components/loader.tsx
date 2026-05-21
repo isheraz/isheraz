@@ -1,11 +1,17 @@
 'use client'
 
 import React from 'react'
+import { Logo } from './logo'
 
 export function Loader() {
   return (
     <div className="loader-screen">
       <div className="loader-content">
+        {/* Logo floating above loader */}
+        <div className="loader-logo" style={{ position: 'absolute', top: '-60px', left: '50%', transform: 'translateX(-50%)', zIndex: 10 }}>
+          <Logo size={48} />
+        </div>
+
         <svg className="loader-circle" viewBox="0 0 140 140" width="140" height="140">
           {/* Circle outline */}
           <circle cx="70" cy="70" r="68" fill="none" stroke="currentColor" strokeWidth="2" className="loader-border" />
