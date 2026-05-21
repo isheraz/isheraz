@@ -1825,68 +1825,56 @@ html { scroll-behavior: smooth; }
 
 .loader-content {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 32px;
-}
-
-.loader-orbits {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  height: 120px;
+  width: 120px;
 }
 
-.loader-orbit {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  animation: orbit linear infinite;
+.loader-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
 }
 
-.loader-orbit[style*="--orbit-index: 0"] {
-  animation-duration: 2.4s;
-  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
-}
-.loader-orbit[style*="--orbit-index: 1"] {
-  animation-duration: 1.8s;
-  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
-  animation-direction: reverse;
-}
-.loader-orbit[style*="--orbit-index: 2"] {
-  animation-duration: 3s;
-  border: 1px solid color-mix(in srgb, var(--accent) 10%, transparent);
+.loader-bar {
+  width: 14px;
+  max-height: var(--bar-height);
+  height: 0;
+  border-radius: 2px;
+  background: var(--fg-3);
+  animation: fill-bar 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
 }
 
-.loader-dot {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
+/* Staggered animation for each bar */
+.loader-bar[style*="--bar-index: 0"] {
+  animation-delay: 0s;
+  background: var(--fg-3);
+}
+.loader-bar[style*="--bar-index: 1"] {
+  animation-delay: 0.2s;
+  background: var(--fg-3);
+}
+.loader-bar[style*="--bar-index: 2"] {
+  animation-delay: 0.4s;
   background: var(--accent);
-  top: -3px;
-  left: 50%;
-  transform: translateX(-50%);
-  box-shadow: 0 0 8px color-mix(in srgb, var(--accent) 40%, transparent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+.loader-bar[style*="--bar-index: 3"] {
+  animation-delay: 0.6s;
+  background: var(--fg-3);
 }
 
-@keyframes orbit {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.loader-label {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--fg-3);
-  animation: fade-pulse 1.2s ease-in-out infinite;
-}
-
-@keyframes fade-pulse {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
+@keyframes fill-bar {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: var(--bar-height);
+    opacity: 1;
+  }
 }
