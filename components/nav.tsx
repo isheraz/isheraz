@@ -25,7 +25,7 @@ export function Nav({ theme, onToggleTheme }: any) {
     <header className={open ? 'nav open' : 'nav'}>
       <div className="shell nav-inner">
         <a href="#top" className="nav-mark" onClick={() => setOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <LogoWordmark size={20} />
+          <LogoWordmark size={32} />
         </a>
         <nav className="nav-links" aria-label="primary">
           {links.map(([label, href]) => (
@@ -102,9 +102,8 @@ export function Footer() {
       <div className="shell">
         <div className="footer-grid">
           <div>
-            <div className="nav-mark" style={{ marginBottom: 14 }}>
-              <span className="dot"></span>
-              <span>isheraz</span>
+            <div style={{ marginBottom: 14 }}>
+              <LogoWordmark size={24} />
             </div>
             <p style={{ color: 'var(--fg-3)', fontSize: 14, margin: 0, maxWidth: '38ch', lineHeight: 1.55 }}>
               Sheraz Ahmed — Solutions Architect & AI product builder. Building from Lahore for the world.
