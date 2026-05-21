@@ -11,9 +11,10 @@
   --fg-4: #9a9a93;
   --border: rgba(11, 11, 10, 0.08);
   --border-strong: rgba(11, 11, 10, 0.16);
-  --accent: #ff5b1f;
+  /* --accent: #ff5b1f; */
+  --accent: #8ec052;
   --accent-fg: #ffffff;
-  --accent-soft: rgba(255, 91, 31, 0.10);
+  --accent-soft: rgba(142, 192, 82, 0.10);
   --grid-0: #ebebe8;
   --grid-1: #d6e8d4;
   --grid-2: #9cd193;
@@ -45,7 +46,7 @@
   --fg-4: #5f5d57;
   --border: rgba(255, 255, 250, 0.08);
   --border-strong: rgba(255, 255, 250, 0.18);
-  --accent-soft: rgba(255, 91, 31, 0.16);
+  --accent-soft: rgba(142, 192, 82, 0.16);
   --grid-0: #1a1a19;
   --grid-1: #0e3818;
   --grid-2: #1a6b2a;

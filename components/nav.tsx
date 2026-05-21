@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Arrow, GitHub, LinkedIn, Mail, Sun, Moon } from './icons'
+import { LogoWordmark } from './logo'
 
 const links = [
   ['Essays', '#essays'],
@@ -23,9 +24,8 @@ export function Nav({ theme, onToggleTheme }: any) {
   return (
     <header className={open ? 'nav open' : 'nav'}>
       <div className="shell nav-inner">
-        <a href="#top" className="nav-mark" onClick={() => setOpen(false)}>
-          <span className="dot"></span>
-          <span>isheraz</span>
+        <a href="#top" className="nav-mark" onClick={() => setOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <LogoWordmark size={20} />
         </a>
         <nav className="nav-links" aria-label="primary">
           {links.map(([label, href]) => (

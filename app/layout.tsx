@@ -6,6 +6,10 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'Sheraz Ahmed — Solutions Architect & AI Product Builder',
   description: 'Sheraz Ahmed — Solutions Architect, engineering leader, AI product builder. Essays, ventures, and consulting.',
+  icons: {
+    icon: '/logo.svg',
+    apple: '/logo.svg',
+  },
 }
 
 export default function RootLayout({
