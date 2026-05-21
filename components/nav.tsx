@@ -130,7 +130,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h4>Adventures</h4>
+            <h4>Ventures</h4>
             <ul>
               <li><a href="https://stage.chasyr.com" target="_blank" rel="noreferrer">Chasyr ↗</a></li>
               <li><a href="https://adjudication.io" target="_blank" rel="noreferrer">Adjudication.io ↗</a></li>

@@ -474,7 +474,7 @@ section + section { padding-top: 0; }
 }
 
 .detail-body {
-  max-width: 720px;
+  /* max-width: 720px; */
   margin: 64px 0;
   font-size: 16px;
   line-height: 1.7;
