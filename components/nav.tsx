@@ -41,6 +41,9 @@ export function Nav({ theme, onToggleTheme }: any) {
           <a className="icon-btn" href="https://linkedin.com/in/isheraz" target="_blank" rel="noreferrer" aria-label="LinkedIn">
             <LinkedIn size={14} />
           </a>
+          <a className="icon-btn" href="mailto:sherazahmed93@gmail.com" aria-label="Email">
+            <Mail size={14} />
+          </a>
           <button className="icon-btn" onClick={onToggleTheme} aria-label="Toggle theme">
             {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
           </button>
