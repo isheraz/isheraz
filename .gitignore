@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDE & tools
+.history/
+.playwright-mcp/
+.impeccable.md
+
+# screenshots & reference files
+*.png
+screenshots/
+isheraz.com _standalone_.html
