@@ -41,7 +41,7 @@ export function Nav({ theme, onToggleTheme }: any) {
           <a className="icon-btn" href="https://linkedin.com/in/isheraz" target="_blank" rel="noreferrer" aria-label="LinkedIn">
             <LinkedIn size={14} />
           </a>
-          <a className="icon-btn" href="mailto:sherazahmed93@gmail.com" aria-label="Email">
+          <a className="icon-btn" href="mailto:sherazahmdd@gmail.com" aria-label="Email">
             <Mail size={14} />
           </a>
           <button className="icon-btn" onClick={onToggleTheme} aria-label="Toggle theme">
@@ -81,7 +81,7 @@ export function Nav({ theme, onToggleTheme }: any) {
           <a className="icon-btn" href="https://linkedin.com/in/isheraz" target="_blank" rel="noreferrer" aria-label="LinkedIn">
             <LinkedIn size={14} />
           </a>
-          <a className="icon-btn" href="mailto:sherazahmed93@gmail.com" aria-label="Email">
+          <a className="icon-btn" href="mailto:sherazahmdd@gmail.com" aria-label="Email">
             <Mail size={14} />
           </a>
         </div>
@@ -124,7 +124,7 @@ export function Footer() {
             <ul>
               <li><a href="https://github.com/isheraz" target="_blank" rel="noreferrer">GitHub ↗</a></li>
               <li><a href="https://linkedin.com/in/isheraz" target="_blank" rel="noreferrer">LinkedIn ↗</a></li>
-              <li><a href="mailto:sherazahmed93@gmail.com">Email</a></li>
+              <li><a href="mailto:sherazahmdd@gmail.com">Email</a></li>
               <li><a href="tel:+923124501070">+92-312-450-1070</a></li>
             </ul>
           </div>

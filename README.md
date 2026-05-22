@@ -5,7 +5,7 @@ A refined, minimal portfolio showcasing 11+ years of shipping full-stack, cloud-
 ### 🔗 Quick Links
 - **Portfolio**: [isheraz.com](https://isheraz.com) — Essays, projects, and more
 - **Open for consulting**: 1 slot available in Q3 2026
-- **Email**: [sherazahmed93@gmail.com](mailto:sherazahmed93@gmail.com)
+- **Email**: [sherazahmdd@gmail.com](mailto:sherazahmdd@gmail.com)
 - **LinkedIn**: [@isheraz](https://linkedin.com/in/isheraz)
 - **Location**: Lahore, Pakistan (UTC+5)
 
@@ -89,7 +89,7 @@ I write regularly about architecture, AI, and building at scale. Read on [ishera
 ## Contact & Connect
 
 - 💼 **Consulting**: [1 slot available in Q3 2026](https://isheraz.com#hire) — Full-stack architecture, AI integration, technical strategy
-- 📧 **Email**: [sherazahmed93@gmail.com](mailto:sherazahmed93@gmail.com)
+- 📧 **Email**: [sherazahmdd@gmail.com](mailto:sherazahmdd@gmail.com)
 - 🔗 **LinkedIn**: [@isheraz](https://linkedin.com/in/isheraz)
 - 🐙 **GitHub**: [@isheraz](https://github.com/isheraz)
 - 📱 **Phone**: +92-312-450-1070
