@@ -2,7 +2,12 @@
 
 A refined, minimal portfolio showcasing 11+ years of shipping full-stack, cloud-native, and AI-powered products at scale—from pre-seed startups to government systems.
 
-**Visit**: https://isheraz.com
+### 🔗 Quick Links
+- **Portfolio**: [isheraz.com](https://isheraz.com) — Essays, projects, and more
+- **Open for consulting**: 1 slot available in Q3 2026
+- **Email**: [sherazahmed93@gmail.com](mailto:sherazahmed93@gmail.com)
+- **LinkedIn**: [@isheraz](https://linkedin.com/in/isheraz)
+- **Location**: Lahore, Pakistan (UTC+5)
 
 ---
 
@@ -22,13 +27,13 @@ I architect and ship products that matter. Currently building **Chasyr** (AI voi
 
 ---
 
-## Portfolio Sections
+## On My Portfolio
 
-- **Essays** — Long-form thinking on architecture, AI, and building at scale
-- **Projects** — Selected work: Chasyr, Adjudication.io, Cadence, Column, Floty
-- **GitHub Activity** — 3,238 contributions/year · 1.2k PRs reviewed · 312 issues closed
-- **Education** — Stanford, AWS certifications, continuous learning
-- **Now** — What I'm building and advising on right now
+- **[Essays](https://isheraz.com#essays)** — Long-form thinking on architecture, AI, and building at scale
+- **[Projects](https://isheraz.com#projects)** — Chasyr, Adjudication.io, Cadence, Column, Floty
+- **[GitHub Stats](https://isheraz.com#github)** — 3,238 contributions/year · 1.2k PRs reviewed · 312 issues closed
+- **[Education](https://isheraz.com#education)** — Stanford, AWS certifications, continuous learning
+- **[Now](https://isheraz.com#now)** — Current work and focus areas
 
 ---
 
@@ -60,6 +65,33 @@ I architect and ship products that matter. Currently building **Chasyr** (AI voi
 - **Animations**: Smooth, organic motion using cubic-bezier easing
 - **Loader**: Circular liquid-fill with multi-layer wave animation
 - **Component library**: Custom CSS, no external UI frameworks
+
+---
+
+## Essays & Thinking
+
+I write regularly about architecture, AI, and building at scale. Read on [isheraz.com/essays](https://isheraz.com#essays):
+
+- **Architecture & Systems** — Designing for scale, distributed systems, infrastructure
+- **AI & Agents** — LLMs, agentic workflows, voice systems, vector search
+- **Building & Shipping** — Product strategy, team scaling, founder lessons
+- **Technical Strategy** — Cloud-native patterns, performance, reliability
+
+---
+
+## Get in Touch
+
+- 💼 **Hire me**: [Consulting slots available](https://isheraz.com#hire) — Full-stack architecture, AI integration, technical strategy
+- 📧 **Email**: [sherazahmed93@gmail.com](mailto:sherazahmed93@gmail.com)
+- 🔗 **Connect**: [LinkedIn](https://linkedin.com/in/isheraz) | [GitHub](https://github.com/isheraz)
+- 📱 **Call**: +92-312-450-1070
+
+---
+
+## What I'm Building
+
+**[Chasyr](https://stage.chasyr.com)** — AI voice agents for invoice recovery  
+**Advising** — Punjab Government on AI in special-needs education
 
 ---
 
