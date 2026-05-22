@@ -32,7 +32,7 @@ I architect and ship products that matter. Currently building **Chasyr** (AI voi
 - **[Essays](https://isheraz.com#essays)** — Long-form thinking on architecture, AI, and building at scale
 - **[Projects](https://isheraz.com#projects)** — Chasyr, Adjudication.io, Cadence, Column, Floty
 - **[GitHub Stats](https://isheraz.com#github)** — 3,238 contributions/year · 1.2k PRs reviewed · 312 issues closed
-- **[Education](https://isheraz.com#education)** — Stanford, AWS certifications, continuous learning
+- **[Education](https://isheraz.com#education)** — AWS certifications, continuous learning
 - **[Now](https://isheraz.com#now)** — Current work and focus areas
 
 ---
@@ -79,15 +79,6 @@ I write regularly about architecture, AI, and building at scale. Read on [ishera
 
 ---
 
-## Get in Touch
-
-- 💼 **Hire me**: [Consulting slots available](https://isheraz.com#hire) — Full-stack architecture, AI integration, technical strategy
-- 📧 **Email**: [sherazahmed93@gmail.com](mailto:sherazahmed93@gmail.com)
-- 🔗 **Connect**: [LinkedIn](https://linkedin.com/in/isheraz) | [GitHub](https://github.com/isheraz)
-- 📱 **Call**: +92-312-450-1070
-
----
-
 ## What I'm Building
 
 **[Chasyr](https://stage.chasyr.com)** — AI voice agents for invoice recovery  
@@ -95,13 +86,14 @@ I write regularly about architecture, AI, and building at scale. Read on [ishera
 
 ---
 
-## Contact
+## Contact & Connect
 
-- **Email**: sherazahmed93@gmail.com
-- **GitHub**: [@isheraz](https://github.com/isheraz)
-- **LinkedIn**: [@isheraz](https://linkedin.com/in/isheraz)
-- **Phone**: +92-312-450-1070
-- **Location**: Lahore, Pakistan (UTC+5)
+- 💼 **Consulting**: [1 slot available in Q3 2026](https://isheraz.com#hire) — Full-stack architecture, AI integration, technical strategy
+- 📧 **Email**: [sherazahmed93@gmail.com](mailto:sherazahmed93@gmail.com)
+- 🔗 **LinkedIn**: [@isheraz](https://linkedin.com/in/isheraz)
+- 🐙 **GitHub**: [@isheraz](https://github.com/isheraz)
+- 📱 **Phone**: +92-312-450-1070
+- 📍 **Location**: Lahore, Pakistan (UTC+5)
 
 ---
 
