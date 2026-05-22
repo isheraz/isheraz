@@ -14,7 +14,7 @@ export function Hire() {
         </div>
         <div className="hire-pitch">
           <p>You've got a product team that's confused about <em>infra and architecture</em> — or you know you should be adopting AI but don't know where to start. I've done this 25+ times. I'll come in, untangle it, and leave you with a team that knows how to ship.</p>
-          <a className="btn btn-accent" href="mailto:sherazahmdd@gmail.com">
+          <a className="btn btn-accent" href="mailto:sherazahmed93@gmail.com">
             Email me directly <Arrow size={13} />
           </a>
         </div>
@@ -32,7 +32,7 @@ export function Hire() {
                   <li key={j}><Check /> <span>{f}</span></li>
                 ))}
               </ul>
-              <a className={`btn tier-cta ${t.featured ? 'btn-accent' : ''}`} href="mailto:sherazahmdd@gmail.com">
+              <a className={`btn tier-cta ${t.featured ? 'btn-accent' : ''}`} href="mailto:sherazahmed93@gmail.com">
                 {t.cta} <Arrow size={13} />
               </a>
             </div>

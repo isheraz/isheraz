@@ -124,7 +124,7 @@ export function Footer() {
             <ul>
               <li><a href="https://github.com/isheraz" target="_blank" rel="noreferrer">GitHub ↗</a></li>
               <li><a href="https://linkedin.com/in/isheraz" target="_blank" rel="noreferrer">LinkedIn ↗</a></li>
-              <li><a href="mailto:sherazahmdd@gmail.com">Email</a></li>
+              <li><a href="mailto:sherazahmed93@gmail.com">Email</a></li>
               <li><a href="tel:+923124501070">+92-312-450-1070</a></li>
             </ul>
           </div>
