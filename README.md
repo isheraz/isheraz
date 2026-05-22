@@ -2,12 +2,7 @@
 
 A refined, minimal portfolio showcasing 11+ years of shipping full-stack, cloud-native, and AI-powered products at scale—from pre-seed startups to government systems.
 
-### 🔗 Quick Links
-- **Portfolio**: [isheraz.com](https://isheraz.com) — Essays, projects, and more
-- **Open for consulting**: 1 slot available in Q3 2026
-- **Email**: [sherazahmdd@gmail.com](mailto:sherazahmdd@gmail.com)
-- **LinkedIn**: [@isheraz](https://linkedin.com/in/isheraz)
-- **Location**: Lahore, Pakistan (UTC+5)
+**[Visit isheraz.com](https://isheraz.com)** | 💼 [Hire me](https://isheraz.com#hire) | 📧 [sherazahmdd@gmail.com](mailto:sherazahmdd@gmail.com)
 
 ---
 
