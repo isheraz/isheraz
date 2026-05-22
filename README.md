@@ -52,15 +52,6 @@ I architect and ship products that matter. Currently building **Chasyr** (AI voi
 | | TypeScript | Type-safe development |
 | | Git | Version control, deployment automation |
 
-### Design System
-
-- **Accent color**: Sage green (#8ec052) — organic, intentional
-- **Logo**: Abstract flowing symbol + wordmark (SVG)
-- **Theme system**: Light mode default, dark mode support
-- **Animations**: Smooth, organic motion using cubic-bezier easing
-- **Loader**: Circular liquid-fill with multi-layer wave animation
-- **Component library**: Custom CSS, no external UI frameworks
-
 ---
 
 ## Essays & Thinking
