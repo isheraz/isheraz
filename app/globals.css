@@ -16,10 +16,10 @@
   --accent-fg: #ffffff;
   --accent-soft: rgba(142, 192, 82, 0.10);
   --grid-0: #ebebe8;
-  --grid-1: #d6e8d4;
-  --grid-2: #9cd193;
-  --grid-3: #5cb853;
-  --grid-4: #2e9c2a;
+  --grid-1: #b7d9b4;
+  --grid-2: #7cc472;
+  --grid-3: #4ea844;
+  --grid-4: #328a2a;
 
   /* Type */
   --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
@@ -48,10 +48,10 @@
   --border-strong: rgba(255, 255, 250, 0.18);
   --accent-soft: rgba(142, 192, 82, 0.16);
   --grid-0: #1a1a19;
-  --grid-1: #0e3818;
-  --grid-2: #1a6b2a;
-  --grid-3: #2e9c3f;
-  --grid-4: #58d068;
+  --grid-1: #174720;
+  --grid-2: #227d34;
+  --grid-3: #3eb851;
+  --grid-4: #6be37b;
 }
 
 [data-density="compact"] {
@@ -482,7 +482,7 @@ section + section { padding-top: 0; }
   color: var(--fg-2);
 }
 .detail-body p { margin: 18px 0; }
-.detail-body .detail-lede {
+.detail-body p.lede {
   font-size: 18px;
   color: var(--fg);
   font-weight: 500;
@@ -1638,14 +1638,14 @@ html { scroll-behavior: smooth; }
   margin: 0 0 24px;
   text-wrap: pretty;
 }
-.reader-body p.reader-lede {
+.reader-body p.reader-lede, .reader-body p.lede {
   font-size: 21px;
   line-height: 1.55;
   color: var(--fg);
   font-weight: 400;
   margin-bottom: 32px;
 }
-.reader-body p.reader-lede::first-letter {
+.reader-body p.reader-lede::first-letter, .reader-body p.lede::first-letter {
   font-family: var(--font-serif);
   float: left;
   font-size: 76px;
@@ -1791,8 +1791,8 @@ html { scroll-behavior: smooth; }
   .reader-bar-inner { height: 54px; }
   .reader-bar-meta .essay-cat { display: none; }
   .reader-body { font-size: 17px; }
-  .reader-body p.reader-lede { font-size: 19px; }
-  .reader-body p.reader-lede::first-letter { font-size: 60px; }
+  .reader-body p.reader-lede, .reader-body p.lede { font-size: 19px; }
+  .reader-body p.reader-lede::first-letter, .reader-body p.lede::first-letter { font-size: 60px; }
   .reader-body blockquote { font-size: 21px; padding-left: 18px; margin: 28px 0; }
   .reader-body h2 { font-size: 22px; margin: 36px 0 14px; }
   .reader-title { font-size: clamp(30px, 7vw, 40px); }

@@ -4,14 +4,17 @@ import { EDU, EDU_ALL } from '@/lib/data'
 import Link from 'next/link'
 import { Tutorial, Talk, Resource } from './icons'
 
-export function Education() {
+export function Education({ education = [] }: { education?: any[] }) {
   const [tab, setTab] = useState('Tutorials')
-  const items = (EDU as any)[tab]
   const icons: any = { Tutorials: Tutorial, Talks: Talk, Resources: Resource }
-
-  const getItemIndex = (item: any) => {
-    return EDU_ALL.findIndex(edu => edu.title === item.title)
+  
+  const typeMap: any = {
+    'Tutorials': 'tutorial',
+    'Talks': 'talk',
+    'Resources': 'resource'
   }
+  
+  const items = education.filter((e) => e.type === typeMap[tab])
 
   return (
     <section id="education">
@@ -26,7 +29,7 @@ export function Education() {
         <div className="edu-tabs" role="tablist">
           {['Tutorials', 'Talks', 'Resources'].map(t => {
             const Ico = icons[t]
-            const count = (EDU as any)[t].length
+            const count = education.filter((e) => e.type === typeMap[t]).length
             return (
               <button key={t} className="edu-tab" onClick={() => setTab(t)} role="tab" aria-pressed={tab === t}>
                 <Ico /> {t} <span className="count">{count}</span>
@@ -35,18 +38,20 @@ export function Education() {
           })}
         </div>
         <div className="edu-grid">
-          {items.map((it: any, i: number) => {
-            const itemIndex = getItemIndex(it)
+          {items.map((it: any) => {
+            const strippedDesc = typeof it.description === 'string' 
+              ? it.description.replace(/<[^>]*>?/gm, '') 
+              : ''
             return (
-              <Link key={i} className="edu-card" href={`/education/${itemIndex}`}>
+              <Link key={it.id} className="edu-card" href={`/education/${it.slug}`}>
                 <div className="edu-kind">
                   <span className="kind-dot"></span>
-                  {it.meta[0]}
+                  {it.meta_tags?.[0]}
                 </div>
                 <h3>{it.title}</h3>
-                <p>{it.desc}</p>
+                <p>{strippedDesc.length > 120 ? strippedDesc.slice(0, 120) + '...' : strippedDesc}</p>
                 <div className="edu-meta">
-                  <span>{it.meta[1]}</span>
+                  <span>{it.meta_tags?.[1]}</span>
                 </div>
               </Link>
             )

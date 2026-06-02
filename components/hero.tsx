@@ -1,7 +1,24 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Arrow } from './icons'
+
+function useGithubTotal() {
+  const [total, setTotal] = useState(3238)
+  useEffect(() => {
+    async function fetchTotal() {
+      try {
+        const res = await fetch('/api/github')
+        if (res.ok) {
+          const data = await res.json()
+          if (data && data.totalContributions) setTotal(data.totalContributions)
+        }
+      } catch (err) {}
+    }
+    fetchTotal()
+  }, [])
+  return total
+}
 
 function HeroLight() {
   const canvasRef = React.useRef<HTMLCanvasElement>(null)
@@ -112,12 +129,21 @@ function HeroLight() {
   )
 }
 
-function HeroCopy() {
+function HeroCopy({ siteSettings = null, consultingTiers = [] }: { siteSettings?: any, consultingTiers?: any[] }) {
+  const total = useGithubTotal()
+  const totalSlots = consultingTiers.reduce((acc, tier) => acc + (tier.inventory_available || 0), 0)
+  const isAccepting = siteSettings?.is_accepting_projects ?? true
+  const isAvailable = isAccepting && totalSlots > 0
+  
+  const date = new Date()
+  const year = date.getFullYear()
+  const quarter = Math.floor(date.getMonth() / 3) + 1
+
   return (
     <>
-      <span className="hero-available">
-        <span className="pulse"></span>
-        Open for 1 consulting slot · Q3 2026
+      <span className="hero-available" style={!isAvailable ? { opacity: 0.6 } : {}}>
+        {isAvailable && <span className="pulse"></span>}
+        {isAvailable ? `Open for ${totalSlots} consulting slot${totalSlots > 1 ? 's' : ''}` : 'Fully booked'} · Q{quarter} {year}
       </span>
       <h1>
         Software Architect.<br />
@@ -140,8 +166,21 @@ function HeroCopy() {
       </div>
       <div className="hero-meta">
         <span><b>11+</b> years shipping</span>
-        <span><b>3,238</b> GitHub contributions / year</span>
-        <span><b>4</b> AI ventures in flight</span>
+        <span><b>{total.toLocaleString()}</b> GitHub contributions / year</span>
+        <span>
+          {siteSettings?.meta_side_bets ? (
+            /^\d+/.test(siteSettings.meta_side_bets) ? (
+              <>
+                <b>{siteSettings.meta_side_bets.match(/^\d+/)?.[0]}</b>
+                {siteSettings.meta_side_bets.replace(/^\d+/, '')}
+              </>
+            ) : (
+              siteSettings.meta_side_bets
+            )
+          ) : (
+            <><b>4</b> AI ventures in flight</>
+          )}
+        </span>
         <span><b>Lahore, PK</b> · UTC+5</span>
       </div>
     </>
@@ -149,9 +188,11 @@ function HeroCopy() {
 }
 
 function HeroStat() {
+  const total = useGithubTotal()
+  
   return (
     <div className="hero-stat">
-      <div className="hero-stat-num">3,238</div>
+      <div className="hero-stat-num">{total.toLocaleString()}</div>
       <div className="hero-stat-label">GitHub contributions, last 12 months — @isheraz</div>
       <div className="hero-stat-row">
         <div className="mini"><b>59</b><span>repositories</span></div>
@@ -163,18 +204,18 @@ function HeroStat() {
   )
 }
 
-export function Hero({ variant = 'default' }: { variant?: string }) {
+export function Hero({ variant = 'default', siteSettings = null, consultingTiers = [] }: { variant?: string, siteSettings?: any, consultingTiers?: any[] }) {
   return (
     <section className="hero" data-variant={variant} id="top">
       <HeroLight />
       <div className="shell">
         {variant === 'split' ? (
           <div className="hero-grid">
-            <HeroCopy />
+            <HeroCopy siteSettings={siteSettings} consultingTiers={consultingTiers} />
             <HeroStat />
           </div>
         ) : (
-          <HeroCopy />
+          <HeroCopy siteSettings={siteSettings} consultingTiers={consultingTiers} />
         )}
       </div>
     </section>

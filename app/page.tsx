@@ -1,117 +1,49 @@
-'use client'
+import { createClient } from '@/utils/supabase/server'
+import { HomePageClient } from './home-client'
 
-import React from 'react'
-import { Nav, Footer } from '@/components/nav'
-import { Hero } from '@/components/hero'
-import { NowStrip } from '@/components/now'
-import { Projects } from '@/components/projects'
-import { Essays } from '@/components/essays'
-import { Hire } from '@/components/hire'
-import { Education } from '@/components/education'
-import { GitHubSection } from '@/components/github'
-import { Newsletter } from '@/components/newsletter'
-import { About } from '@/components/about'
-import { useTweaks } from '@/components/tweaks-panel'
+export default async function App() {
+  const supabase = await createClient()
+  const { data: featuredProjects } = await supabase
+    .from('projects')
+    .select('*')
+    .eq('is_featured', true)
+    .order('year', { ascending: false })
 
-const TWEAK_DEFAULTS = {
-  dark: false,
-  accent: '#8ec052',
-  density: 'compact',
-  font: 'spaceGrotesk',
-  heroVariant: 'default'
-}
+  const { data: essays } = await supabase
+    .from('essays')
+    .select('*')
+    .eq('is_published', true)
+    .order('published_at', { ascending: false })
 
-const FONT_STACKS = {
-  geist: {
-    sans: '"Geist", ui-sans-serif, system-ui, -apple-system, sans-serif',
-    mono: '"Geist Mono", ui-monospace, "SF Mono", Menlo, monospace',
-    serif: '"Instrument Serif", ui-serif, Georgia, serif',
-  },
-  instrument: {
-    sans: '"Instrument Sans", ui-sans-serif, system-ui, sans-serif',
-    mono: '"JetBrains Mono", ui-monospace, monospace',
-    serif: '"Instrument Serif", ui-serif, Georgia, serif',
-  },
-  spaceGrotesk: {
-    sans: '"Space Grotesk", ui-sans-serif, system-ui, sans-serif',
-    mono: '"JetBrains Mono", ui-monospace, monospace',
-    serif: '"Instrument Serif", ui-serif, Georgia, serif',
-  },
-}
+  const { data: education } = await supabase
+    .from('education')
+    .select('*')
+    .order('sort_order', { ascending: true })
 
-function accentFg(hex: string) {
-  const h = String(hex).replace('#', '')
-  const x = h.length === 3 ? h.replace(/./g, c => c + c) : h.padEnd(6, '0')
-  const n = parseInt(x.slice(0, 6), 16)
-  const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255
-  const lum = r * 299 + g * 587 + b * 114
-  return lum > 148000 ? '#0a0a0a' : '#ffffff'
-}
+  const { data: consultingTiers } = await supabase
+    .from('consulting_tiers')
+    .select('*')
+    .order('sort_order', { ascending: true })
 
-function hexToRgba(hex: string, alpha: number) {
-  const h = String(hex).replace('#', '')
-  const x = h.length === 3 ? h.replace(/./g, c => c + c) : h.padEnd(6, '0')
-  const n = parseInt(x.slice(0, 6), 16)
-  const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`
-}
+  const { data: nowUpdates } = await supabase
+    .from('now_updates')
+    .select('*')
+    .order('sort_order', { ascending: true })
 
-function useScrollReveal(dep: any) {
-  React.useEffect(() => {
-    if (typeof IntersectionObserver === 'undefined') return undefined
-    const id = window.requestAnimationFrame(() => {
-      const els = document.querySelectorAll('.reveal:not(.in)')
-      if (!els.length) return
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add('in')
-            io.unobserve(e.target)
-          }
-        })
-      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' })
-      els.forEach((el) => io.observe(el))
-    })
-    return () => window.cancelAnimationFrame(id)
-  }, [dep])
-}
+  const { data: siteSettings } = await supabase
+    .from('site_settings')
+    .select('*')
+    .maybeSingle()
 
-export default function App() {
-  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS)
+  const { count: subscriberCount } = await supabase
+    .from('subscribers')
+    .select('*', { count: 'exact', head: true })
 
-  React.useEffect(() => {
-    const root = document.documentElement
-    root.setAttribute('data-theme', t.dark ? 'dark' : 'light')
-    root.setAttribute('data-density', t.density)
-    root.style.setProperty('--accent', t.accent)
-    root.style.setProperty('--accent-fg', accentFg(t.accent))
-    root.style.setProperty('--accent-soft', hexToRgba(t.accent, t.dark ? 0.16 : 0.10))
-    const stack = (FONT_STACKS as any)[t.font] || FONT_STACKS.geist
-    root.style.setProperty('--font-sans', stack.sans)
-    root.style.setProperty('--font-mono', stack.mono)
-    root.style.setProperty('--font-serif', stack.serif)
-    try { localStorage.setItem('isheraz.theme', t.dark ? 'dark' : 'light') } catch (e) {}
-  }, [t.dark, t.density, t.accent, t.font])
+  const { data: footerVentures } = await supabase
+    .from('projects')
+    .select('*')
+    .order('year', { ascending: false })
+    .limit(5)
 
-  useScrollReveal('home')
-
-  const toggleTheme = () => setTweak('dark', !t.dark)
-
-  return (
-    <>
-      <Nav theme={t.dark ? 'dark' : 'light'} onToggleTheme={toggleTheme} />
-      <main>
-        <Hero variant={t.heroVariant} />
-        <NowStrip />
-        <div className="reveal"><Projects /></div>
-        <div className="reveal"><Essays /></div>
-        <div className="reveal"><Hire /></div>
-        <div className="reveal"><Education /></div>
-        <div className="reveal"><GitHubSection /></div>
-        <div className="reveal"><Newsletter /></div>
-        <div className="reveal"><About /></div>
-      </main>
-      <Footer />
-    </>
-  )
+  return <HomePageClient featuredProjects={featuredProjects || []} footerVentures={footerVentures || []} essays={essays || []} education={education || []} consultingTiers={consultingTiers || []} subscriberCount={subscriberCount || 0} nowUpdates={nowUpdates || []} siteSettings={siteSettings || null} />
 }

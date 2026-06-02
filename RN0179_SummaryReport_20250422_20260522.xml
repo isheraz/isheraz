@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="REBSSummaryStyleSheet.xsl"?>
+<Report xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Sensor="Battelle REBS" ID="RN0179" NickName="" From="04/22/25 00:00:00" To="05/22/26 23:59:59" GeneratedOn="05/22/26 11:33:52">
+    <Location Latitude="1.58333333333333" Longitude="103" Type="Manual" Updated="07/08/25 10:39:31">
+        <Mode Type="Replenishment" Started="07/08/25 10:39:31" Ended="07/08/25 11:41:15" StartedBy="Dass" EndedBy="External Interface" SoftwareVersion="3.6.0.11" LibraryVersion="2.3.1.0">
+            <UserData />
+        </Mode>
+        <Mode Type="PoweringDown" Started="07/08/25 11:41:15" Ended="07/08/25 11:41:16" StartedBy="External Interface" EndedBy="System" SoftwareVersion="3.6.0.11" LibraryVersion="2.3.1.0">
+            <UserData />
+        </Mode>
+        <Mode Type="Off" Started="07/08/25 11:41:16" Ended="07/08/25 11:47:01" StartedBy="System" EndedBy="System" SoftwareVersion="3.6.0.11" LibraryVersion="2.3.1.0">
+            <UserData />
+        </Mode>
+        <Mode Type="WarmingUp" Started="07/08/25 11:47:01" Ended="07/08/25 11:49:16" StartedBy="System" EndedBy="System" SoftwareVersion="3.6.0.11" LibraryVersion="2.3.1.0">
+            <UserData />
+        </Mode>
+        <Mode Type="Replenishment" Started="07/08/25 11:49:16" Ended="07/08/25 12:12:26" StartedBy="System" EndedBy="System" SoftwareVersion="3.6.0.11" LibraryVersion="2.3.1.0">
+            <UserData />
+        </Mode>
+        <Mode Type="Stop" Started="07/08/25 12:12:26" Ended="07/08/25 12:14:44" StartedBy="System" EndedBy="Dass" SoftwareVersion="3.6.0.11" LibraryVersion="2.3.1.0">
+            <UserData />
+        </Mode>
+        <Mode Type="Configuration" Started="07/08/25 12:14:44" Ended="07/08/25 12:16:30" StartedBy="Dass" EndedBy="System" SoftwareVersion="3.6.0.11" LibraryVersion="2.3.1.0">
+            <UserData />
+        </Mode>
+        <Mode Type="Stop" Started="07/08/25 12:16:30" Ended="07/08/25 12:18:19" StartedBy="System" EndedBy="External Interface" SoftwareVersion="3.6.0.11" LibraryVersion="2.3.1.0">
+            <UserData />
+        </Mode>
+        <Mode Type="Single" Started="07/08/25 12:18:19" Ended="07/08/25 12:22:06" StartedBy="External Interface" EndedBy="External Interface" SoftwareVersion="3.6.0.11" LibraryVersion="2.3.1.0">
+            <UserData />
+        </Mode>
+        <Mode Type="Stop" Started="07/08/25 12:22:06" Ended="07/08/25 12:23:20" StartedBy="External Interface" EndedBy="External Interface" SoftwareVersion="3.6.0.11" LibraryVersion="2.3.1.0">
+            <UserData />
+        </Mode>
+        <Mode Type="Replenishment" Started="07/08/25 12:23:20" Ended="07/11/25 12:03:43" StartedBy="External Interface" EndedBy="System" SoftwareVersion="3.6.0.11" LibraryVersion="2.3.1.0">
+            <UserData />
+            <Alert Type="Active" ID="1" Date="07/11/25 12:53:30">
+                <Fault>DoorOpen</Fault>
+                <Details>Front door is open. Close and latch door before resuming operation.</Details>
+            </Alert>
+            <Alert Type="Acknowledged" ID="1" Date="07/11/25 12:54:32">
+                <Fault>DoorOpen</Fault>
+                <Details>Front door is open. Close and latch door before resuming operation.</Details>
+            </Alert>
+            <Alert Type="Cleared" ID="1" Date="07/11/25 12:54:33">
+                <Fault>DoorOpen</Fault>
+                <Details>Front door is open. Close and latch door before resuming operation.</Details>
+            </Alert>
+            <Cycle>
+                <Collection Started="07/11/25 12:05:24" Ended="07/11/25 12:30:21">
+                    <VolumeConcentrated>0</VolumeConcentrated>
+                </Collection>
+                <Analysis Started="07/11/25 12:30:40" Ended="07/11/25 12:50:13">
+                    <OpticalCalibrationDate>03/09/21</OpticalCalibrationDate>
+                    <OpticalCalibrationDueDate>Tue, 08 Mar 2022 19:00:00 GMT</OpticalCalibrationDueDate>
+                    <TotalParticles>26</TotalParticles>
+                    <NonBiologicalParticles>7</NonBiologicalParticles>
+                    <BiologicalParticles>19</BiologicalParticles>
+                </Analysis>
+            </Cycle>
+        </Mode>
+        <Mode Type="Stop" Started="07/11/25 12:03:43" Ended="07/11/25 12:03:50" StartedBy="System" EndedBy="External Interface" SoftwareVersion="3.6.0.11" LibraryVersion="2.3.1.0">
+            <UserData />
+        </Mode>
+        <Mode Type="Auto" Started="07/11/25 12:03:50" Ended="07/11/25 12:51:02" StartedBy="External Interface" EndedBy="External Interface" SoftwareVersion="3.6.0.11" LibraryVersion="2.3.1.0">
+            <UserData />
+        </Mode>
+        <Mode Type="Stop" Started="07/11/25 12:51:02" Ended="07/11/25 12:53:30" StartedBy="External Interface" EndedBy="System" SoftwareVersion="3.6.0.11" LibraryVersion="2.3.1.0">
+            <UserData />
+        </Mode>
+        <Mode Type="Replenishment" Started="07/11/25 12:53:30" StartedBy="System" SoftwareVersion="3.6.0.11" LibraryVersion="2.3.1.0">
+            <UserData />
+        </Mode>
+    </Location>
+</Report>

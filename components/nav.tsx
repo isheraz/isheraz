@@ -5,11 +5,11 @@ import { Arrow, GitHub, LinkedIn, Mail, Sun, Moon } from './icons'
 import { LogoWordmark } from './logo'
 
 const links = [
-  ['Essays', '#essays'],
-  ['Projects', '#projects'],
-  ['Hire me', '#hire'],
-  ['Education', '#education'],
-  ['About', '#about'],
+  ['Essays', '/#essays'],
+  ['Projects', '/#projects'],
+  ['Hire me', '/#hire'],
+  ['Education', '/#education'],
+  ['About', '/#about'],
 ]
 
 export function Nav({ theme, onToggleTheme }: any) {
@@ -95,8 +95,21 @@ export function Nav({ theme, onToggleTheme }: any) {
   )
 }
 
-export function Footer() {
+export function Footer({ projects = [], siteSettings = null }: { projects?: any[], siteSettings?: any }) {
   const year = new Date().getFullYear()
+  
+  let lastShippedText = 'today'
+  if (siteSettings?.last_shipped_date) {
+    const d = new Date(siteSettings.last_shipped_date)
+    const now = new Date()
+    const diffTime = Math.abs(now.getTime() - d.getTime())
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
+    
+    if (diffDays === 0) lastShippedText = 'today'
+    else if (diffDays === 1) lastShippedText = 'yesterday'
+    else lastShippedText = `${diffDays} days ago`
+  }
+
   return (
     <footer className="footer">
       <div className="shell">
@@ -131,17 +144,19 @@ export function Footer() {
           <div>
             <h4>Ventures</h4>
             <ul>
-              <li><a href="https://stage.chasyr.com" target="_blank" rel="noreferrer">Chasyr ↗</a></li>
-              <li><a href="https://adjudication.io" target="_blank" rel="noreferrer">Adjudication.io ↗</a></li>
-              <li><a href="https://runoncadence.com" target="_blank" rel="noreferrer">Cadence ↗</a></li>
-              <li><a href="https://www.column.us/" target="_blank" rel="noreferrer">Column ↗</a></li>
-              <li><a href="https://floty.ai" target="_blank" rel="noreferrer">Floty ↗</a></li>
+              {projects.map((p: any) => (
+                <li key={p.id}>
+                  <a href={p.url || p.href || '#'} target="_blank" rel="noreferrer">
+                    {p.name} ↗
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
         <div className="footer-bottom">
           <span>© {year} Sheraz Ahmed · built in Lahore</span>
-          <span>Last shipped: today</span>
+          <span>Last shipped: {lastShippedText}</span>
         </div>
       </div>
     </footer>

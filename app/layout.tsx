@@ -7,8 +7,8 @@ export const metadata: Metadata = {
   title: 'Sheraz Ahmed — Solutions Architect & AI Product Builder',
   description: 'Sheraz Ahmed — Solutions Architect, engineering leader, AI product builder. Essays, ventures, and consulting.',
   icons: {
-    icon: '/logo.svg',
-    apple: '/logo.svg',
+    icon: '/favicon.png',
+    apple: '/favicon.png',
   },
 }
 
@@ -25,7 +25,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
         <Script id="theme-init" strategy="beforeInteractive">{`(function(){try{var s=localStorage.getItem('isheraz.theme');if(s==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();`}</Script>
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <LoaderWrapper />
         {children}
       </body>

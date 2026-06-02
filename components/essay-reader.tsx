@@ -1,13 +1,10 @@
 'use client'
 import React from 'react'
 import { useRouter } from 'next/navigation'
-import { ESSAYS, ESSAY_BODIES } from '@/lib/data'
 import { GitHub, LinkedIn, Arrow } from './icons'
 
-export function EssayReader({ id }: { id: number }) {
+export function EssayReader({ essay }: { essay: any }) {
   const router = useRouter()
-  const essay = ESSAYS[id]
-  const body = ESSAY_BODIES[id] || []
   const [progress, setProgress] = React.useState(0)
   const scrollerRef = React.useRef<HTMLDivElement>(null)
 
@@ -41,21 +38,21 @@ export function EssayReader({ id }: { id: number }) {
       <header className="reader-bar">
         <div className="shell reader-bar-inner">
           <div className="reader-bar-meta">
-            <span className="essay-cat" data-cat={essay.cat}>{essay.cat}</span>
+            <span className="essay-cat" data-cat={essay.category}>{essay.category}</span>
             <span>·</span>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--fg-3)' }}>{essay.read} read</span>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--fg-3)' }}>{essay.read_time} read</span>
           </div>
         </div>
       </header>
       <div className="reader-scroller" ref={scrollerRef}>
         <article className="reader-article">
           <div className="reader-eyebrow">
-            <span className="essay-cat" data-cat={essay.cat}>{essay.cat}</span>
+            <span className="essay-cat" data-cat={essay.category}>{essay.category}</span>
             <span>·</span>
-            <time>{fmtDate(essay.date)}</time>
+            <time>{fmtDate(essay.published_at)}</time>
           </div>
           <h1 className="reader-title">{essay.title}</h1>
-          <p className="reader-deck">{essay.sub}</p>
+          <p className="reader-deck">{essay.subtitle}</p>
           <div className="reader-byline">
             <div className="reader-avatar">SA</div>
             <div>
@@ -68,14 +65,7 @@ export function EssayReader({ id }: { id: number }) {
               <a className="icon-btn" href="https://linkedin.com/in/isheraz" target="_blank" rel="noreferrer"><LinkedIn size={14} /></a>
             </div>
           </div>
-          <div className="reader-body">
-            {body.map((b: any, i: number) => {
-              if (b.type === 'h2') return <h2 key={i}>{b.text}</h2>
-              if (b.type === 'lede') return <p key={i} className="reader-lede">{b.text}</p>
-              if (b.type === 'pull') return <blockquote key={i}>{b.text}</blockquote>
-              return <p key={i}>{b.text}</p>
-            })}
-            {body.length === 0 && <p style={{ color: 'var(--fg-3)', fontStyle: 'italic' }}>Draft in progress. Check back soon.</p>}
+          <div className="reader-body" dangerouslySetInnerHTML={{ __html: essay.content }}>
           </div>
           <div className="reader-end">
             <div className="reader-end-rule" />

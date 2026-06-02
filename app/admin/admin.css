@@ -1,0 +1,4 @@
+@import "tailwindcss";
+
+@source "../../app/admin";
+@source "../../components/admin";

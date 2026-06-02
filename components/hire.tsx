@@ -1,8 +1,31 @@
 'use client'
-import { TIERS } from '@/lib/data'
+import { useState } from 'react'
 import { Check, Arrow } from './icons'
+import { createClient } from '@/utils/supabase/client'
 
-export function Hire() {
+export function Hire({ tiers = [] }: { tiers?: any[] }) {
+  const [loading, setLoading] = useState<string | null>(null)
+  const supabase = createClient()
+
+  async function handleCheckout(tierId: string) {
+    setLoading(tierId)
+    try {
+      const { data, error } = await supabase.functions.invoke('create-checkout', {
+        body: { tier_id: tierId, return_url: window.location.href }
+      })
+      if (error) throw error
+      
+      if (data?.url) {
+        window.location.href = data.url
+      } else {
+        alert(data?.error || 'Checkout failed')
+      }
+    } catch (e) {
+      alert('Error creating checkout session')
+    }
+    setLoading(null)
+  }
+
   return (
     <section id="hire">
       <div className="shell">
@@ -19,22 +42,51 @@ export function Hire() {
           </a>
         </div>
         <div className="hire-grid">
-          {TIERS.map((t: any, i: number) => (
-            <div key={i} className={t.featured ? 'tier featured' : 'tier'}>
-              {t.badge && <div className="tier-badge">{t.badge}</div>}
+          {tiers.map((t: any) => (
+            <div key={t.id} className={t.is_featured ? 'tier featured' : 'tier'}>
+              {t.badge_text && <div className="tier-badge">{t.badge_text}</div>}
               <div className="tier-name">{t.name}</div>
               <div>
-                <div className="tier-price">{t.price}<span>{t.unit}</span></div>
+                <div className="tier-price">{t.price_label}<span>{t.unit}</span></div>
               </div>
-              <div className="tier-desc">{t.desc}</div>
+              <div className="tier-desc">{t.description}</div>
               <ul className="tier-feats">
-                {t.feats.map((f: string, j: number) => (
+                {(t.features || []).map((f: string, j: number) => (
                   <li key={j}><Check /> <span>{f}</span></li>
                 ))}
               </ul>
-              <a className={`btn tier-cta ${t.featured ? 'btn-accent' : ''}`} href="mailto:sherazahmdd@gmail.com">
-                {t.cta} <Arrow size={13} />
-              </a>
+              {t.inventory_available === 0 ? (
+                <button 
+                  className="btn tier-cta" 
+                  disabled
+                  style={{ width: '100%', cursor: 'not-allowed', opacity: 0.5 }}
+                >
+                  Sold Out
+                </button>
+              ) : t.stripe_price_id ? (
+                <button 
+                  className={`btn tier-cta ${t.is_featured ? 'btn-accent' : ''}`} 
+                  onClick={() => handleCheckout(t.id)}
+                  disabled={loading === t.id}
+                  style={{ width: '100%' }}
+                >
+                  {loading === t.id ? 'Loading...' : t.cta_text} <Arrow size={13} />
+                </button>
+              ) : (
+                <a className={`btn tier-cta ${t.is_featured ? 'btn-accent' : ''}`} href="mailto:sherazahmdd@gmail.com" style={{ display: 'inline-flex', justifyContent: 'center', width: '100%' }}>
+                  {t.cta_text} <Arrow size={13} />
+                </a>
+              )}
+              {typeof t.inventory_available === 'number' && t.inventory_available > 0 && (
+                <div style={{ textAlign: 'center', marginTop: 12, fontSize: 13, color: 'var(--accent)' }}>
+                  Only {t.inventory_available} spots remaining
+                </div>
+              )}
+              {t.inventory_available === 0 && (
+                <div style={{ textAlign: 'center', marginTop: 12, fontSize: 13, color: 'var(--fg-muted)' }}>
+                  No more spots remaining
+                </div>
+              )}
             </div>
           ))}
         </div>

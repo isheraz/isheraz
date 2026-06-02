@@ -1,13 +1,10 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { EDU_ALL, EDU_BODIES } from '@/lib/data'
 import { Arrow } from './icons'
 
-export default function EducationDetail({ id }: { id: number }) {
+export default function EducationDetail({ item, moreItems }: { item: any, moreItems: any[] }) {
   const router = useRouter()
-  const item = EDU_ALL[id]
-  const body = EDU_BODIES[id] || []
 
   if (!item) return null
 
@@ -20,47 +17,35 @@ export default function EducationDetail({ id }: { id: number }) {
         <div className="detail-head">
           <div className="detail-kind">
             <span className="kind-dot"></span>
-            {item.meta[0]}
+            {item.meta_tags?.[0]}
           </div>
           <h1>{item.title}</h1>
-          <p className="detail-desc">{item.desc}</p>
           <div className="detail-meta">
-            <span>{item.meta[1]}</span>
-            {item.category && <span className="detail-cat">{item.category}</span>}
+            <span>{item.meta_tags?.[1]}</span>
+            {item.type && <span className="detail-cat">{item.type}</span>}
           </div>
         </div>
 
-        {body.length > 0 && (
-          <div className="detail-body">
-            {body.map((section: any, i: number) => {
-              if (section.type === 'h2') return <h2 key={i}>{section.text}</h2>
-              if (section.type === 'p') return <p key={i}>{section.text}</p>
-              if (section.type === 'lede') return <p key={i} className="detail-lede">{section.text}</p>
-              if (section.type === 'pull') return <blockquote key={i}>{section.text}</blockquote>
-              if (section.type === 'ul') return (
-                <ul key={i}>
-                  {section.items.map((item: string, j: number) => <li key={j}>{item}</li>)}
-                </ul>
-              )
-              return null
-            })}
-          </div>
+        {item.description && (
+          <div className="detail-body" dangerouslySetInnerHTML={{ __html: item.description }} />
         )}
 
         <div className="detail-more">
           <h3>More resources</h3>
           <div className="more-grid">
-            {EDU_ALL.map((edu, idx) => {
-              if (idx === id || edu.title === item.title) return null
+            {moreItems.map((edu: any) => {
+              const strippedDesc = typeof edu.description === 'string' 
+                ? edu.description.replace(/<[^>]*>?/gm, '') 
+                : ''
               return (
-                <Link key={idx} href={`/education/${idx}`} className="more-card">
+                <Link key={edu.id} href={`/education/${edu.slug}`} className="more-card">
                   <div className="more-kind">
                     <span className="kind-dot"></span>
-                    {edu.meta[0]}
+                    {edu.meta_tags?.[0]}
                   </div>
                   <h4>{edu.title}</h4>
-                  <p>{edu.desc}</p>
-                  <span className="more-meta">{edu.meta[1]}</span>
+                  <p>{strippedDesc.length > 120 ? strippedDesc.slice(0, 120) + '...' : strippedDesc}</p>
+                  <span className="more-meta">{edu.meta_tags?.[1]}</span>
                 </Link>
               )
             })}

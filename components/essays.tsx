@@ -1,17 +1,16 @@
 'use client'
 import { useState } from 'react'
-import { ESSAYS } from '@/lib/data'
 import Link from 'next/link'
 
-export function Essays() {
-  const [activeFilter, setActiveFilter] = useState('Religious')
+export function Essays({ essays }: { essays: any[] }) {
+  const [activeFilter, setActiveFilter] = useState('All')
   const [currentPage, setCurrentPage] = useState(1)
   const filters = ['All', 'Technical', 'Personal', 'Religious']
   const essaysPerPage = 6
 
   const filteredEssays = activeFilter === 'All'
-    ? ESSAYS
-    : ESSAYS.filter(e => e.cat === activeFilter)
+    ? essays
+    : essays.filter(e => e.category === activeFilter)
 
   const totalPages = Math.ceil(filteredEssays.length / essaysPerPage)
   const startIdx = (currentPage - 1) * essaysPerPage
@@ -55,17 +54,16 @@ export function Essays() {
         </div>
         <div className="essay-list">
           {paginatedEssays.map((e) => {
-            const actualIndex = ESSAYS.indexOf(e)
             const fmtDate = (d: string) => new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
             return (
-              <Link key={actualIndex} className="essay-row" href={`/essays/${actualIndex}`}>
-                <div className="essay-date">{fmtDate(e.date)}</div>
+              <Link key={e.id} className="essay-row" href={`/essays/${e.slug}`}>
+                <div className="essay-date">{fmtDate(e.published_at)}</div>
                 <div>
                   <div className="essay-title">{e.title}</div>
-                  <div className="essay-title-meta">{e.sub}</div>
+                  <div className="essay-title-meta">{e.subtitle}</div>
                 </div>
-                <div className="essay-cat" data-cat={e.cat}>{e.cat}</div>
-                <div className="essay-read">{e.read}</div>
+                <div className="essay-cat" data-cat={e.category}>{e.category}</div>
+                <div className="essay-read">{e.read_time}</div>
               </Link>
             )
           })}
