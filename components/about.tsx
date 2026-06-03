@@ -1,4 +1,4 @@
-import DOMPurify from 'isomorphic-dompurify'
+import sanitizeHtml from 'sanitize-html'
 import { createClient } from '@/utils/supabase/server'
 
 export async function About() {
@@ -33,7 +33,7 @@ export async function About() {
     </>
   )
 
-  const sanitizedBio = siteSettings?.bio_text ? DOMPurify.sanitize(siteSettings.bio_text) : null
+  const sanitizedBio = siteSettings?.bio_text ? sanitizeHtml(siteSettings.bio_text) : null
 
   return (
     <section id="about">
