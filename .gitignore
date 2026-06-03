@@ -47,6 +47,5 @@ next-env.d.ts
 .impeccable.md
 
 # screenshots & reference files
-*.png
 screenshots/
 isheraz.com _standalone_.html
