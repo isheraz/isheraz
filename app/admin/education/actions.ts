@@ -3,6 +3,18 @@
 import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { z } from 'zod'
+
+const educationSchema = z.object({
+  title: z.string().min(1, 'Title is required'),
+  slug: z.string().optional(),
+  school: z.string().optional(),
+  type: z.string().optional(),
+  description: z.string().optional(),
+  meta_tags: z.array(z.string()).optional().default([]),
+  sort_order: z.number().int().default(0),
+  is_published: z.boolean().default(true)
+})
 
 export async function deleteEducation(id: string) {
   const supabase = await createClient()
@@ -25,7 +37,9 @@ export async function createEducation(payload: any) {
     payload.slug = payload.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
   }
   
-  const { error } = await supabase.from('education').insert(payload)
+  const validatedData = educationSchema.parse(payload)
+  
+  const { error } = await supabase.from('education').insert(validatedData)
   
   if (error) {
     throw new Error(error.message)
@@ -39,7 +53,9 @@ export async function createEducation(payload: any) {
 export async function updateEducation(id: string, payload: any) {
   const supabase = await createClient()
   
-  const { error } = await supabase.from('education').update(payload).eq('id', id)
+  const validatedData = educationSchema.parse(payload)
+  
+  const { error } = await supabase.from('education').update(validatedData).eq('id', id)
   
   if (error) {
     throw new Error(error.message)

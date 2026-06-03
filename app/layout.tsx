@@ -17,12 +17,21 @@ export const metadata: Metadata = {
     siteName: 'Sheraz Ahmed',
     locale: 'en_US',
     type: 'website',
+    images: [
+      {
+        url: 'https://isheraz.com/og-default.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Sheraz Ahmed',
+      }
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Sheraz Ahmed — Solutions Architect & AI Product Builder',
     description: 'Sheraz Ahmed — Solutions Architect, engineering leader, AI product builder. Essays, ventures, and consulting.',
     creator: '@sheraz_ahmd',
+    images: ['https://isheraz.com/og-default.jpg'],
   },
   robots: {
     index: true,
