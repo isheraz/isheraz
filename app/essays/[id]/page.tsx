@@ -1,6 +1,26 @@
 import { createClient } from '@/utils/supabase/server'
 import { EssayReader } from '@/components/essay-reader'
 import { notFound } from 'next/navigation'
+import { Metadata } from 'next'
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id: slug } = await params
+  const supabase = await createClient()
+  const { data: essay } = await supabase.from('essays').select('title, summary').eq('slug', slug).single()
+  
+  if (!essay) return {}
+
+  return {
+    title: essay.title,
+    description: essay.summary || `An essay by Sheraz Ahmed`,
+    openGraph: {
+      title: essay.title,
+      description: essay.summary || `An essay by Sheraz Ahmed`,
+      type: 'article',
+      url: `https://isheraz.com/essays/${slug}`
+    }
+  }
+}
 
 export default async function EssayPage({ params }: { params: Promise<{ id: string }> }) {
   const { id: slug } = await params
@@ -14,5 +34,27 @@ export default async function EssayPage({ params }: { params: Promise<{ id: stri
 
   if (!essay) notFound()
 
-  return <EssayReader essay={essay} />
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: essay.title,
+    description: essay.summary || `An essay by Sheraz Ahmed`,
+    author: {
+      '@type': 'Person',
+      name: 'Sheraz Ahmed',
+      url: 'https://isheraz.com'
+    },
+    datePublished: essay.published_at || essay.created_at,
+    url: `https://isheraz.com/essays/${slug}`
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <EssayReader essay={essay} />
+    </>
+  )
 }

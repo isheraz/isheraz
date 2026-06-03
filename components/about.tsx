@@ -1,8 +1,29 @@
-'use client'
+import DOMPurify from 'isomorphic-dompurify'
+import { createClient } from '@/utils/supabase/server'
 
-export function About({ updates = [], siteSettings = null, consultingTiers = [] }: { updates?: any[], siteSettings?: any, consultingTiers?: any[] }) {
-  const totalSlots = consultingTiers.reduce((acc, tier) => acc + (tier.inventory_available || 0), 0)
+export async function About() {
+  const supabase = await createClient()
+
+  const [settingsRes, tiersRes] = await Promise.all([
+    supabase.from('site_settings').select('*').single(),
+    supabase.from('consulting_tiers').select('*').order('sort_order', { ascending: true })
+  ])
+
+  const siteSettings = settingsRes.data
+  const consultingTiers = tiersRes.data || []
+
+  const totalSlots = consultingTiers.reduce((acc: any, tier: any) => acc + (tier.inventory_available || 0), 0)
   
+  let openToText = 'Unavailable'
+  if ((siteSettings?.is_accepting_projects ?? true) && totalSlots > 0) {
+    const activeTiers = consultingTiers.filter((t: any) => (t.inventory_available || 0) > 0)
+    if (activeTiers.length === 1) {
+      openToText = `${activeTiers[0].inventory_available} ${activeTiers[0].name.toLowerCase()}`
+    } else if (activeTiers.length > 1) {
+      const last = activeTiers.pop()
+      openToText = `${activeTiers.map((t: any) => `${t.inventory_available} ${t.name.toLowerCase()}`).join(', ')} and ${last.inventory_available} ${last.name.toLowerCase()}`
+    }
+  }
   const defaultBio = (
     <>
       <p><strong>Sheraz Ahmed.</strong> Solutions Architect, engineering leader, AI product builder. I've been shipping software for 11+ years — from CodeIgniter backends serving 100K OTT users at TV2U, to 25-project portfolios at InvoZone, to architecting AI voice agents for Australian SMBs at 9T5 / Sociabletech.</p>
@@ -11,6 +32,8 @@ export function About({ updates = [], siteSettings = null, consultingTiers = [] 
       <p style={{ marginTop: 28 }}>Want to talk? <a href="mailto:sherazahmdd@gmail.com" style={{ color: 'var(--accent)', borderBottom: '1px solid' }}>sherazahmdd@gmail.com</a> · <a href="https://github.com/isheraz" target="_blank" rel="noreferrer" style={{ color: 'var(--accent)', borderBottom: '1px solid' }}>@isheraz</a></p>
     </>
   )
+
+  const sanitizedBio = siteSettings?.bio_text ? DOMPurify.sanitize(siteSettings.bio_text) : null
 
   return (
     <section id="about">
@@ -23,8 +46,8 @@ export function About({ updates = [], siteSettings = null, consultingTiers = [] 
         </div>
         <div className="about-grid">
           <div>
-            {siteSettings?.bio_text ? (
-              <div dangerouslySetInnerHTML={{ __html: siteSettings.bio_text }} />
+            {sanitizedBio ? (
+              <div dangerouslySetInnerHTML={{ __html: sanitizedBio }} />
             ) : (
               defaultBio
             )}
@@ -36,7 +59,7 @@ export function About({ updates = [], siteSettings = null, consultingTiers = [] 
             <div className="about-meta-row"><b>Stack</b><span>{siteSettings?.meta_stack || 'TS · Next · Supabase · AWS'}</span></div>
             <div className="about-meta-row"><b>Side bets</b><span>{siteSettings?.meta_side_bets || '4 in flight'}</span></div>
             <div className="about-meta-row"><b>Reading</b><span>{siteSettings?.meta_reading || 'A Philosophy of Software Design'}</span></div>
-            <div className="about-meta-row"><b>Open to</b><span>{(siteSettings?.is_accepting_projects ?? true) && totalSlots > 0 ? `${totalSlots} consulting slot${totalSlots === 1 ? '' : 's'}` : 'Unavailable'}</span></div>
+            <div className="about-meta-row"><b>Open to</b><span>{openToText}</span></div>
           </div>
         </div>
       </div>

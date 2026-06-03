@@ -3,6 +3,7 @@
 import React from 'react'
 import { Arrow, GitHub, LinkedIn, Mail, Sun, Moon } from './icons'
 import { LogoWordmark } from './logo'
+import { useTheme } from './providers'
 
 const links = [
   ['Essays', '/#essays'],
@@ -12,7 +13,9 @@ const links = [
   ['About', '/#about'],
 ]
 
-export function Nav({ theme, onToggleTheme }: any) {
+export function Nav() {
+  const { t, toggleTheme } = useTheme()
+  const theme = t.dark ? 'dark' : 'light'
   const [open, setOpen] = React.useState(false)
 
   React.useEffect(() => {
@@ -44,7 +47,7 @@ export function Nav({ theme, onToggleTheme }: any) {
           <a className="icon-btn" href="mailto:sherazahmdd@gmail.com" aria-label="Email">
             <Mail size={14} />
           </a>
-          <button className="icon-btn" onClick={onToggleTheme} aria-label="Toggle theme">
+          <button className="icon-btn" onClick={toggleTheme} aria-label="Toggle theme">
             {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
           </button>
           <a className="btn btn-accent" href="#hire" style={{ marginLeft: 4 }}>
@@ -95,70 +98,3 @@ export function Nav({ theme, onToggleTheme }: any) {
   )
 }
 
-export function Footer({ projects = [], siteSettings = null }: { projects?: any[], siteSettings?: any }) {
-  const year = new Date().getFullYear()
-  
-  let lastShippedText = 'today'
-  if (siteSettings?.last_shipped_date) {
-    const d = new Date(siteSettings.last_shipped_date)
-    const now = new Date()
-    const diffTime = Math.abs(now.getTime() - d.getTime())
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
-    
-    if (diffDays === 0) lastShippedText = 'today'
-    else if (diffDays === 1) lastShippedText = 'yesterday'
-    else lastShippedText = `${diffDays} days ago`
-  }
-
-  return (
-    <footer className="footer">
-      <div className="shell">
-        <div className="footer-grid">
-          <div>
-            <div style={{ marginBottom: 14 }}>
-              <LogoWordmark size={24} />
-            </div>
-            <p style={{ color: 'var(--fg-3)', fontSize: 14, margin: 0, maxWidth: '38ch', lineHeight: 1.55 }}>
-              Sheraz Ahmed — Solutions Architect & AI product builder. Building from Lahore for the world.
-            </p>
-          </div>
-          <div>
-            <h4>Site</h4>
-            <ul>
-              <li><a href="#essays">Essays</a></li>
-              <li><a href="#projects">Projects</a></li>
-              <li><a href="#hire">Hire me</a></li>
-              <li><a href="#education">Education</a></li>
-              <li><a href="#about">About</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4>Elsewhere</h4>
-            <ul>
-              <li><a href="https://github.com/isheraz" target="_blank" rel="noreferrer">GitHub ↗</a></li>
-              <li><a href="https://linkedin.com/in/isheraz" target="_blank" rel="noreferrer">LinkedIn ↗</a></li>
-              <li><a href="mailto:sherazahmdd@gmail.com">Email</a></li>
-              <li><a href="tel:+923124501070">+92-312-450-1070</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4>Ventures</h4>
-            <ul>
-              {projects.map((p: any) => (
-                <li key={p.id}>
-                  <a href={p.url || p.href || '#'} target="_blank" rel="noreferrer">
-                    {p.name} ↗
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <span>© {year} Sheraz Ahmed · built in Lahore</span>
-          <span>Last shipped: {lastShippedText}</span>
-        </div>
-      </div>
-    </footer>
-  )
-}

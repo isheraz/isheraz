@@ -1,6 +1,6 @@
 import { createClient } from '@/utils/supabase/server'
 import Link from 'next/link'
-import { deleteEducation } from './actions'
+import { deleteEducation, togglePublishedStatus } from './actions'
 import { DeleteButton } from '@/components/admin/delete-button'
 
 export default async function EducationAdminPage() {
@@ -37,6 +37,7 @@ export default async function EducationAdminPage() {
           <thead>
             <tr style={{ borderBottom: '1px solid var(--border)', background: 'rgba(0,0,0,0.02)' }}>
               <th style={{ padding: '1rem', fontWeight: 500, color: 'var(--fg-muted)', fontSize: '0.875rem' }}>Title</th>
+              <th style={{ padding: '1rem', fontWeight: 500, color: 'var(--fg-muted)', fontSize: '0.875rem' }}>Status</th>
               <th style={{ padding: '1rem', fontWeight: 500, color: 'var(--fg-muted)', fontSize: '0.875rem' }}>Type</th>
               <th style={{ padding: '1rem', fontWeight: 500, color: 'var(--fg-muted)', fontSize: '0.875rem' }}>Sort Order</th>
               <th style={{ padding: '1rem', fontWeight: 500, color: 'var(--fg-muted)', fontSize: '0.875rem', textAlign: 'right' }}>Actions</th>
@@ -47,6 +48,23 @@ export default async function EducationAdminPage() {
               <tr key={item.id} style={{ borderBottom: '1px solid var(--border)' }}>
                 <td style={{ padding: '1rem' }}>
                   <div style={{ fontWeight: 500 }}>{item.title}</div>
+                </td>
+                <td style={{ padding: '1rem', fontSize: '0.875rem' }}>
+                  <form action={togglePublishedStatus.bind(null, item.id, item.is_published)}>
+                    <button type="submit" style={{ 
+                      padding: '4px 10px', 
+                      borderRadius: '999px', 
+                      fontSize: '0.75rem', 
+                      fontWeight: 500,
+                      background: item.is_published ? 'rgba(22, 163, 74, 0.1)' : 'rgba(245, 158, 11, 0.1)', 
+                      color: item.is_published ? '#16a34a' : '#f59e0b',
+                      border: `1px solid ${item.is_published ? 'rgba(22, 163, 74, 0.2)' : 'rgba(245, 158, 11, 0.2)'}`,
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease'
+                    }}>
+                      {item.is_published ? 'Published' : 'Draft'}
+                    </button>
+                  </form>
                 </td>
                 <td style={{ padding: '1rem', fontSize: '0.875rem', textTransform: 'capitalize' }}>{item.type}</td>
                 <td style={{ padding: '1rem', fontSize: '0.875rem' }}>{item.sort_order}</td>
@@ -67,7 +85,7 @@ export default async function EducationAdminPage() {
             ))}
             {(!items || items.length === 0) && (
               <tr>
-                <td colSpan={4} style={{ padding: '2rem', textAlign: 'center', color: 'var(--fg-muted)' }}>
+                <td colSpan={5} style={{ padding: '2rem', textAlign: 'center', color: 'var(--fg-muted)' }}>
                   No education items found.
                 </td>
               </tr>

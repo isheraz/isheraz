@@ -1,9 +1,12 @@
-'use client'
 import { ArrowUpRight } from './icons'
 import Link from 'next/link'
+import { createClient } from '@/utils/supabase/server'
 
-export function Projects({ projects = [] }: { projects?: any[] }) {
-  // If no projects provided via props, we could optionally fallback to static data
+export async function Projects() {
+  const supabase = await createClient()
+  const { data: projects } = await supabase.from('projects').select('*').eq('is_featured', true).order('year', { ascending: false })
+  const items = projects || []
+
   // but for the home page we want to use the DB featured projects.
   
   return (
@@ -13,7 +16,7 @@ export function Projects({ projects = [] }: { projects?: any[] }) {
           <div>
             <div className="section-eyebrow">Selected work / Ventures</div>
             <h2 className="section-title">Products I've built — or am still building.</h2>
-            <p className="section-sub">A curated selection of featured products and case studies.</p>
+            <p className="section-sub">From AI voice agents that close debt to NFT marketplaces serving 300+ concurrent transactions. A subset of what I've shipped.</p>
           </div>
           <Link className="section-link" href="/projects">
             View All Projects <ArrowUpRight size={13} />
@@ -21,7 +24,7 @@ export function Projects({ projects = [] }: { projects?: any[] }) {
         </div>
 
         <div className="proj-grid">
-          {projects.map((p, index) => {
+          {items.map((p, index) => {
             const isFeatured = p.is_featured;
             return (
               <a key={p.id} className={`proj-card ${isFeatured ? 'feature' : ''}`} href={p.href} target="_blank" rel="noreferrer">

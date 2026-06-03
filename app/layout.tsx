@@ -4,8 +4,37 @@ import { LoaderWrapper } from '@/components/loader-wrapper'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Sheraz Ahmed — Solutions Architect & AI Product Builder',
+  metadataBase: new URL('https://isheraz.com'),
+  title: {
+    default: 'Sheraz Ahmed — Solutions Architect & AI Product Builder',
+    template: '%s | Sheraz Ahmed'
+  },
   description: 'Sheraz Ahmed — Solutions Architect, engineering leader, AI product builder. Essays, ventures, and consulting.',
+  openGraph: {
+    title: 'Sheraz Ahmed — Solutions Architect & AI Product Builder',
+    description: 'Sheraz Ahmed — Solutions Architect, engineering leader, AI product builder. Essays, ventures, and consulting.',
+    url: 'https://isheraz.com',
+    siteName: 'Sheraz Ahmed',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Sheraz Ahmed — Solutions Architect & AI Product Builder',
+    description: 'Sheraz Ahmed — Solutions Architect, engineering leader, AI product builder. Essays, ventures, and consulting.',
+    creator: '@sheraz_ahmd',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
     icon: '/favicon.png',
     apple: '/favicon.png',

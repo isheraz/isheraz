@@ -1,9 +1,13 @@
-'use client'
 import { NOW_ITEMS } from '@/lib/data'
+import { createClient } from '@/utils/supabase/server'
 
-export function NowStrip({ updates = [] }: { updates?: any[] }) {
+export async function NowStrip() {
+  const supabase = await createClient()
+  const { data: updates } = await supabase.from('now_updates').select('*').order('created_at', { ascending: false })
+  
+  const items = updates || []
   const today = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-  const itemsToRender = updates.length > 0 ? updates : NOW_ITEMS
+  const itemsToRender = items.length > 0 ? items : NOW_ITEMS
 
   return (
     <div className="now-strip">

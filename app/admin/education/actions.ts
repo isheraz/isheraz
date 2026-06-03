@@ -11,6 +11,13 @@ export async function deleteEducation(id: string) {
   revalidatePath('/', 'layout')
 }
 
+export async function togglePublishedStatus(id: string, currentStatus: boolean) {
+  const supabase = await createClient()
+  await supabase.from('education').update({ is_published: !currentStatus }).eq('id', id)
+  revalidatePath('/admin/education')
+  revalidatePath('/', 'layout')
+}
+
 export async function createEducation(payload: any) {
   const supabase = await createClient()
   

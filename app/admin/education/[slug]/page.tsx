@@ -35,6 +35,7 @@ export default function EditEducationPage({ params }: { params: Promise<{ slug: 
       description: descriptionHtml,
       meta_tags: formData.get('meta_tags') ? JSON.parse(formData.get('meta_tags') as string) : [],
       sort_order: parseInt(formData.get('sort_order') as string, 10),
+      is_published: formData.get('is_published') === 'on',
     })
   }
 
@@ -81,6 +82,11 @@ export default function EditEducationPage({ params }: { params: Promise<{ slug: 
           <div style={{ color: 'black' }}>
             <NovelEditor initialValue={item.description} onChange={(html) => setDescriptionHtml(html)} />
           </div>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <input type="checkbox" id="is_published" name="is_published" defaultChecked={item.is_published} style={{ width: '1.2rem', height: '1.2rem' }} />
+          <label htmlFor="is_published" style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--fg-muted)' }}>Published</label>
         </div>
 
         <button 
