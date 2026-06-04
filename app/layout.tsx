@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://isheraz.com/og-default.jpg',
+        url: 'https://isheraz.com/photo-logo.png',
         width: 1200,
         height: 630,
         alt: 'Sheraz Ahmed',
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: 'Sheraz Ahmed — Solutions Architect & AI Product Builder',
     description: 'Sheraz Ahmed — Solutions Architect, engineering leader, AI product builder. Essays, ventures, and consulting.',
     creator: '@sheraz_ahmd',
-    images: ['https://isheraz.com/og-default.jpg'],
+    images: ['https://isheraz.com/photo-logo.png'],
   },
   robots: {
     index: true,
