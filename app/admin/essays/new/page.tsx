@@ -4,9 +4,20 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import NovelEditor from '@/components/admin/editor'
 import { createEssay } from '../actions'
+import { marked } from 'marked'
 
 export default function NewEssayPage() {
   const [contentHtml, setContentHtml] = useState('')
+  const [editorKey, setEditorKey] = useState(0)
+
+  const handleImportMarkdown = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const text = await file.text()
+    const html = await marked.parse(text)
+    setContentHtml(html)
+    setEditorKey(prev => prev + 1)
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     // We intercept to manually call the server action or just append to FormData
@@ -22,6 +33,7 @@ export default function NewEssayPage() {
       read_time: formData.get('read_time'),
       is_published: formData.get('is_published') === 'on',
       published_at: formData.get('published_at') || new Date().toISOString(),
+      linkedin_post_url: formData.get('linkedin_post_url') || null,
       content: contentHtml
     })
   }
@@ -57,8 +69,8 @@ export default function NewEssayPage() {
             <input id="category" name="category" placeholder="Technical" required style={{ padding: '0.75rem', borderRadius: '6px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--fg)' }} />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <label htmlFor="read_time" style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--fg-muted)' }}>Read Time</label>
-            <input id="read_time" name="read_time" placeholder="8 min" required style={{ padding: '0.75rem', borderRadius: '6px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--fg)' }} />
+            <label htmlFor="linkedin_post_url" style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--fg-muted)' }}>LinkedIn Post URL</label>
+            <input id="linkedin_post_url" name="linkedin_post_url" placeholder="https://linkedin.com/..." style={{ padding: '0.75rem', borderRadius: '6px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--fg)' }} />
           </div>
         </div>
 
@@ -68,9 +80,15 @@ export default function NewEssayPage() {
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          <label style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--fg-muted)' }}>Content</label>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <label style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--fg-muted)' }}>Content</label>
+            <label style={{ fontSize: '0.75rem', cursor: 'pointer', background: 'var(--bg-muted)', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>
+              Import .md
+              <input type="file" accept=".md" onChange={handleImportMarkdown} style={{ display: 'none' }} />
+            </label>
+          </div>
           <div style={{ color: 'black' }}>
-            <NovelEditor onChange={(html) => setContentHtml(html)} />
+            <NovelEditor key={editorKey} initialValue={contentHtml} onChange={(html) => setContentHtml(html)} />
           </div>
         </div>
 
