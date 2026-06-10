@@ -45,6 +45,39 @@ export function EssayReader({ essay }: { essay: any }) {
       <button className="reader-close-fab" onClick={() => router.back()} aria-label="Close essay" title="Close (Esc)">
         <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M4 4l8 8M12 4L4 12" /></svg>
       </button>
+
+      <div className="reader-floating-actions">
+        <button 
+          className="reader-floating-btn"
+          onClick={handleLike}
+          data-active={hasLiked}
+          title={hasLiked ? `${likes} Likes` : "Like this essay"}
+        >
+          <svg viewBox="0 0 24 24" width="18" height="18" fill={hasLiked ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+        </button>
+        
+        {essay.linkedin_post_url ? (
+          <a 
+            className="reader-floating-btn"
+            href={essay.linkedin_post_url} 
+            target="_blank" 
+            rel="noreferrer"
+            title="Reshare on LinkedIn"
+          >
+            <LinkedIn size={18} />
+          </a>
+        ) : (
+          <a 
+            className="reader-floating-btn"
+            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://isheraz.com/essays/${essay.slug}`)}`} 
+            target="_blank" 
+            rel="noreferrer"
+            title="Share on LinkedIn"
+          >
+            <LinkedIn size={18} />
+          </a>
+        )}
+      </div>
       <header className="reader-bar">
         <div className="shell reader-bar-inner">
           <div className="reader-bar-meta">
@@ -82,23 +115,6 @@ export function EssayReader({ essay }: { essay: any }) {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--fg-3)' }}>End of essay</div>
               <div style={{ display: 'flex', gap: '0.5rem' }}>
-                <button 
-                  onClick={handleLike} 
-                  disabled={hasLiked}
-                  style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'var(--bg-muted)', border: 'none', padding: '0.5rem 1rem', borderRadius: '2rem', cursor: hasLiked ? 'default' : 'pointer', color: hasLiked ? 'var(--accent)' : 'var(--fg)', fontSize: '0.875rem', fontWeight: 500, transition: 'all 0.2s' }}
-                >
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill={hasLiked ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                  {likes} {likes === 1 ? 'Like' : 'Likes'}
-                </button>
-                {essay.linkedin_post_url ? (
-                  <a href={essay.linkedin_post_url} target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: '#0a66c2', color: '#fff', textDecoration: 'none', padding: '0.5rem 1rem', borderRadius: '2rem', fontSize: '0.875rem', fontWeight: 500 }}>
-                    <LinkedIn size={14} /> Reshare on LinkedIn
-                  </a>
-                ) : (
-                  <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://isheraz.com/essays/${essay.slug}`)}`} target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: '#0a66c2', color: '#fff', textDecoration: 'none', padding: '0.5rem 1rem', borderRadius: '2rem', fontSize: '0.875rem', fontWeight: 500 }}>
-                    <LinkedIn size={14} /> Share on LinkedIn
-                  </a>
-                )}
               </div>
             </div>
             <div className="reader-end-cta" style={{ marginTop: '2rem' }}>
