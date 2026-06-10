@@ -6,7 +6,7 @@ import { Metadata } from 'next'
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id: slug } = await params
   const supabase = await createClient()
-  const { data: essay } = await supabase.from('essays').select('title, summary').eq('slug', slug).single()
+  const { data: essay } = await supabase.from('essays').select('title, summary').eq('slug', slug).eq('is_published', true).lte('published_at', new Date().toISOString()).single()
   
   if (!essay) return {}
 
@@ -30,6 +30,8 @@ export default async function EssayPage({ params }: { params: Promise<{ id: stri
     .from('essays')
     .select('*')
     .eq('slug', slug)
+    .eq('is_published', true)
+    .lte('published_at', new Date().toISOString())
     .single()
 
   if (!essay) notFound()

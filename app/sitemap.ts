@@ -6,7 +6,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Fetch dynamic routes
   const [essaysRes, projectsRes, eduRes] = await Promise.all([
-    supabase.from('essays').select('slug, updated_at, published_at').eq('is_published', true),
+    supabase.from('essays').select('slug, updated_at, published_at').eq('is_published', true).lte('published_at', new Date().toISOString()),
     supabase.from('projects').select('id, updated_at, created_at'),
     supabase.from('education').select('slug, created_at')
   ])
