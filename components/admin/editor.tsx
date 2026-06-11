@@ -6,7 +6,7 @@ import {
   EditorContent,
   StarterKit
 } from 'novel'
-import { Bold, Italic, Heading1, Heading2, Heading3, Quote, List, ListOrdered } from 'lucide-react'
+import { Bold, Italic, Heading1, Heading2, Heading3, Quote, List, ListOrdered, Link as LinkIcon } from 'lucide-react'
 
 interface NovelEditorProps {
   initialValue?: any
@@ -45,6 +45,24 @@ const Toolbar = ({ editor }: { editor: any }) => {
       <button type="button" onClick={(e) => { e.preventDefault(); editor.chain().focus().toggleBlockquote().run() }} className={btnClass(editor.isActive('blockquote'))}><Quote size={16} /></button>
       <button type="button" onClick={(e) => { e.preventDefault(); editor.chain().focus().toggleBulletList().run() }} className={btnClass(editor.isActive('bulletList'))}><List size={16} /></button>
       <button type="button" onClick={(e) => { e.preventDefault(); editor.chain().focus().toggleOrderedList().run() }} className={btnClass(editor.isActive('orderedList'))}><ListOrdered size={16} /></button>
+      <div className="w-px h-5 bg-[var(--border)] mx-1" />
+      <button 
+        type="button" 
+        onClick={(e) => { 
+          e.preventDefault()
+          if (editor.isActive('link')) {
+            editor.chain().focus().unsetLink().run()
+            return
+          }
+          const url = window.prompt('Enter URL')
+          if (url) {
+            editor.chain().focus().setLink({ href: url }).run()
+          }
+        }} 
+        className={btnClass(editor.isActive('link'))}
+      >
+        <LinkIcon size={16} />
+      </button>
     </div>
   )
 }
