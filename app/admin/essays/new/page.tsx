@@ -34,6 +34,7 @@ export default function NewEssayPage() {
       is_published: formData.get('is_published') === 'on',
       published_at: formData.get('published_at') || new Date().toISOString(),
       linkedin_post_url: formData.get('linkedin_post_url') || null,
+      likes_count: parseInt(formData.get('likes_count') as string, 10) || 0,
       content: contentHtml
     })
   }
@@ -74,9 +75,15 @@ export default function NewEssayPage() {
           </div>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          <label htmlFor="published_at" style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--fg-muted)' }}>Publish Date (YYYY-MM-DD)</label>
-          <input id="published_at" name="published_at" type="date" defaultValue={new Date().toISOString().split('T')[0]} style={{ padding: '0.75rem', borderRadius: '6px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--fg)' }} />
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <label htmlFor="published_at" style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--fg-muted)' }}>Publish Date (YYYY-MM-DD)</label>
+            <input id="published_at" name="published_at" type="date" defaultValue={new Date().toISOString().split('T')[0]} style={{ padding: '0.75rem', borderRadius: '6px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--fg)' }} />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <label htmlFor="likes_count" style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--fg-muted)' }}>Initial Likes</label>
+            <input id="likes_count" name="likes_count" type="number" defaultValue={0} style={{ padding: '0.75rem', borderRadius: '6px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--fg)' }} />
+          </div>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
