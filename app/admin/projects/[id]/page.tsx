@@ -82,6 +82,11 @@ export default async function EditProjectPage({ params }: { params: Promise<{ id
           <label htmlFor="is_featured" style={{ fontSize: '0.875rem', fontWeight: 500 }}>Feature this project on the homepage</label>
         </div>
 
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.25rem' }}>
+          <input type="checkbox" id="hide_url" name="hide_url" defaultChecked={project.hide_url} style={{ width: '1.25rem', height: '1.25rem', accentColor: 'var(--accent)' }} />
+          <label htmlFor="hide_url" style={{ fontSize: '0.875rem', fontWeight: 500 }}>Hide external link on project cards</label>
+        </div>
+
         <button 
           type="submit" 
           style={{ 

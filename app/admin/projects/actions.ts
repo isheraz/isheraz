@@ -15,7 +15,8 @@ const projectSchema = z.object({
   href: z.string().url().or(z.literal('')).optional(),
   role: z.string().optional(),
   year: z.number().int().optional(),
-  is_featured: z.boolean().default(false)
+  is_featured: z.boolean().default(false),
+  hide_url: z.boolean().default(false)
 })
 
 export async function deleteProject(id: string) {
@@ -46,6 +47,7 @@ export async function createProject(formData: FormData) {
     role: formData.get('role') as string,
     year: parseInt(formData.get('year') as string, 10) || new Date().getFullYear(),
     is_featured: formData.get('is_featured') === 'on',
+    hide_url: formData.get('hide_url') === 'on',
   }
 
   const validatedData = projectSchema.parse(payload)
@@ -75,6 +77,7 @@ export async function updateProject(id: string, formData: FormData) {
     role: formData.get('role') as string,
     year: parseInt(formData.get('year') as string, 10) || new Date().getFullYear(),
     is_featured: formData.get('is_featured') === 'on',
+    hide_url: formData.get('hide_url') === 'on',
   }
 
   const validatedData = projectSchema.parse(payload)

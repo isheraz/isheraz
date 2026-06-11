@@ -56,7 +56,10 @@ export default async function ProjectsAdmin() {
             {projects?.map((p) => (
               <tr key={p.id} style={{ borderBottom: '1px solid var(--border)', transition: 'background 0.2s' }}>
                 <td style={{ padding: '1rem' }}>
-                  <div style={{ fontWeight: 500, fontSize: '1.125rem' }}>{p.name}</div>
+                  <div style={{ fontWeight: 500, fontSize: '1.125rem' }}>
+                    {p.name}
+                    {p.hide_url && <span style={{ marginLeft: '8px', fontSize: '0.65rem', background: 'var(--border)', padding: '2px 6px', borderRadius: '4px', color: 'var(--fg-muted)', textTransform: 'uppercase' }}>No Link</span>}
+                  </div>
                   <div style={{ fontSize: '0.875rem', color: 'var(--fg-muted)', marginTop: '0.25rem' }}>/{p.slug}</div>
                 </td>
                 <td style={{ padding: '1rem' }}>

@@ -26,8 +26,9 @@ export async function Projects() {
         <div className="proj-grid">
           {items.map((p, index) => {
             const isFeatured = p.is_featured;
+            const CardWrapper = p.hide_url || !p.href ? 'div' : 'a';
             return (
-              <a key={p.id} className={`proj-card ${isFeatured ? 'feature' : ''}`} href={p.href} target="_blank" rel="noreferrer">
+              <CardWrapper key={p.id} className={`proj-card ${isFeatured ? 'feature' : ''}`} {...(CardWrapper === 'a' ? { href: p.href, target: "_blank", rel: "noreferrer" } : {})}>
                 <div>
                   <div className="proj-head" style={{ marginBottom: isFeatured ? 18 : 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -46,7 +47,11 @@ export async function Projects() {
                   <div className="proj-foot" style={{ marginTop: isFeatured ? 22 : 0 }}>
                     <span>{p.role}{!isFeatured && ` · ${p.year}`}</span>
                     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                      {isFeatured && p.href ? p.href.replace('https://', '').replace('http://', '') : 'Visit'} <ArrowUpRight size={12} />
+                      {!p.hide_url && p.href ? (
+                        <>
+                          {isFeatured ? p.href.replace('https://', '').replace('http://', '') : 'Visit'} <ArrowUpRight size={12} />
+                        </>
+                      ) : null}
                     </span>
                   </div>
                 </div>
@@ -98,7 +103,7 @@ export async function Projects() {
                     </div>
                   </div>
                 )}
-              </a>
+              </CardWrapper>
             )
           })}
         </div>
