@@ -1546,6 +1546,79 @@ html { scroll-behavior: smooth; }
   .reader-close-fab::after { display: none; }
 }
 
+/* Floating engagement actions (Like, Share) */
+.reader-floating-actions {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.reader-floating-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: color-mix(in oklab, var(--bg-elev) 80%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--fg-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .08);
+  transition: all .2s;
+}
+
+.reader-floating-btn:hover {
+  background: var(--bg-elev);
+  color: var(--fg);
+  border-color: var(--fg-3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .12);
+}
+
+.reader-floating-btn[data-active="true"] {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+@media (max-width: 760px) {
+  .reader-floating-actions {
+    top: auto;
+    bottom: 24px;
+    right: 50%;
+    transform: translateX(50%);
+    flex-direction: row;
+    gap: 12px;
+    padding: 6px 12px;
+    background: color-mix(in oklab, var(--bg-elev) 80%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, .12);
+  }
+  .reader-floating-btn {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    width: 40px;
+    height: 40px;
+  }
+  .reader-floating-btn:hover {
+    background: var(--bg-subtle);
+    transform: none;
+    box-shadow: none;
+  }
+}
+
 /* Bottom “back to all essays” link — obvious exit at end of article */
 .reader-end-back {
   display: inline-flex;
