@@ -45,9 +45,11 @@ export function ProjectsClient({ initialProjects }: { initialProjects: any[] }) 
         </div>
         
         <div className="proj-grid">
-          {projects.map(p => (
-            <a key={p.id} className="proj-card" href={p.href} target="_blank" rel="noreferrer">
-              <div>
+          {projects.map(p => {
+            const CardWrapper = p.hide_url || !p.href ? 'div' : 'a';
+            return (
+              <CardWrapper key={p.id} className="proj-card" {...(CardWrapper === 'a' ? { href: p.href, target: "_blank", rel: "noreferrer" } : {})}>
+                <div>
                 <div className="proj-head" style={{ marginBottom: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                     <div className="proj-logo">{p.name.substring(0, 2)}</div>
@@ -63,12 +65,16 @@ export function ProjectsClient({ initialProjects }: { initialProjects: any[] }) 
                 <div className="proj-foot" style={{ marginTop: 0 }}>
                   <span>{p.role} · {p.year}</span>
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                    Visit <ArrowUpRight size={12} />
+                    {!p.hide_url && p.href ? (
+                      <>
+                        Visit <ArrowUpRight size={12} />
+                      </>
+                    ) : null}
                   </span>
                 </div>
               </div>
-            </a>
-          ))}
+            </CardWrapper>
+          )})}
         </div>
 
         {hasMore && (
