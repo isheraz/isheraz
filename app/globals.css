@@ -1559,9 +1559,10 @@ html { scroll-behavior: smooth; }
 }
 
 .reader-floating-btn {
-  width: 44px;
+  min-width: 44px;
   height: 44px;
-  border-radius: 50%;
+  padding: 0 12px;
+  border-radius: 999px;
   border: 1px solid var(--border-strong);
   background: color-mix(in oklab, var(--bg-elev) 80%, transparent);
   backdrop-filter: blur(12px);
@@ -1570,6 +1571,7 @@ html { scroll-behavior: smooth; }
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   cursor: pointer;
   box-shadow: 0 4px 16px rgba(0, 0, 0, .08);
   transition: all .2s;
@@ -1609,8 +1611,9 @@ html { scroll-behavior: smooth; }
     border: none;
     box-shadow: none;
     background: transparent;
-    width: 40px;
+    min-width: 40px;
     height: 40px;
+    padding: 0 8px;
   }
   .reader-floating-btn:hover {
     background: var(--bg-subtle);
