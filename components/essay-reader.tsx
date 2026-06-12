@@ -3,8 +3,10 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 import { GitHub, LinkedIn, Arrow } from './icons'
 import { incrementLike } from '@/app/admin/essays/actions'
+import { useGSAPContext } from '@/components/gsap-provider'
+import Link from 'next/link'
 
-export function EssayReader({ essay }: { essay: any }) {
+export function EssayReader({ essay, relatedEssays = [] }: { essay: any, relatedEssays?: any[] }) {
   const router = useRouter()
   const [progress, setProgress] = React.useState(0)
   const [likes, setLikes] = React.useState(essay?.likes_count || 0)
@@ -17,6 +19,15 @@ export function EssayReader({ essay }: { essay: any }) {
     setHasLiked(true)
     await incrementLike(essay.id)
   }
+
+  const { lenis } = useGSAPContext()
+
+  React.useEffect(() => {
+    if (lenis) {
+      lenis.stop()
+      return () => lenis.start()
+    }
+  }, [lenis])
 
   React.useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') router.back() }
@@ -88,7 +99,7 @@ export function EssayReader({ essay }: { essay: any }) {
           </div>
         </div>
       </header>
-      <div className="reader-scroller" ref={scrollerRef}>
+      <div className="reader-scroller" ref={scrollerRef} data-lenis-prevent>
         <article className="reader-article">
           <div className="reader-eyebrow">
             <span className="essay-cat" data-cat={essay.category}>{essay.category}</span>
@@ -122,6 +133,19 @@ export function EssayReader({ essay }: { essay: any }) {
               <a className="btn btn-accent" href="/#newsletter">Get the next one by email <Arrow size={13} /></a>
             </div>
           </div>
+          
+          {relatedEssays.length > 0 && (
+            <div className="reader-related" style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '1px solid var(--border)' }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--fg-3)', marginBottom: '1rem' }}>Keep Reading</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                {relatedEssays.map(re => (
+                  <Link key={re.id} href={`/essays/${re.slug}`} style={{ textDecoration: 'none', color: 'var(--fg-1)' }} className="related-link">
+                    <span style={{ fontWeight: 500 }}>{re.title}</span> <Arrow size={12} style={{ display: 'inline-block', opacity: 0.5 }} />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </article>
       </div>
     </div>

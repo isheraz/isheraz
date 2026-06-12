@@ -13,6 +13,9 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   return {
     title: essay.title,
     description: essay.summary || `An essay by Sheraz Ahmed`,
+    alternates: {
+      canonical: `/essays/${slug}`
+    },
     openGraph: {
       title: essay.title,
       description: essay.summary || `An essay by Sheraz Ahmed`,
@@ -50,13 +53,22 @@ export default async function EssayPage({ params }: { params: Promise<{ id: stri
     url: `https://isheraz.com/essays/${slug}`
   }
 
+  const { data: relatedEssays } = await supabase
+    .from('essays')
+    .select('id, slug, title')
+    .eq('is_published', true)
+    .neq('id', essay.id)
+    .lte('published_at', new Date().toISOString())
+    .order('published_at', { ascending: false })
+    .limit(3)
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <EssayReader essay={essay} />
+      <EssayReader essay={essay} relatedEssays={relatedEssays || []} />
     </>
   )
 }

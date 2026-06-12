@@ -4,7 +4,9 @@ import React, { createContext, useContext } from 'react'
 import { useTweaks } from '@/components/tweaks-panel'
 
 const TWEAK_DEFAULTS = {
-  dark: false,
+  dark: typeof window !== 'undefined'
+    ? document.documentElement.getAttribute('data-theme') === 'dark'
+    : true, // SSR default — the theme-init script will fix on hydration
   accent: '#8ec052',
   density: 'compact',
   font: 'spaceGrotesk',
@@ -77,6 +79,18 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     try { localStorage.setItem('isheraz.theme', t.dark ? 'dark' : 'light') } catch (e) {}
   }, [t.dark, t.density, t.accent, t.font])
 
+  // Auto switch when OS theme changes
+  React.useEffect(() => {
+    const mql = window.matchMedia('(prefers-color-scheme: dark)')
+    const handleChange = (e: MediaQueryListEvent) => {
+      // Only switch if the user hasn't forced a theme via local storage
+      // Actually, standard behavior is to sync if OS changes while app is open.
+      setTweak('dark', e.matches)
+    }
+    mql.addEventListener('change', handleChange)
+    return () => mql.removeEventListener('change', handleChange)
+  }, [setTweak])
+
   const toggleTheme = () => setTweak('dark', !t.dark)
 
   return (
@@ -86,23 +100,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   )
 }
 
+/**
+ * ScrollRevealProvider — DEPRECATED
+ * Replaced by GSAP ScrollTrigger. Kept as a no-op passthrough so existing
+ * imports don't break during migration. Will be removed once all pages
+ * are migrated to the GSAP animation system.
+ */
 export function ScrollRevealProvider({ children }: { children: React.ReactNode }) {
-  React.useEffect(() => {
-    if (typeof IntersectionObserver === 'undefined') return undefined
-    const id = window.requestAnimationFrame(() => {
-      const els = document.querySelectorAll('.reveal:not(.in)')
-      if (!els.length) return
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add('in')
-            io.unobserve(e.target)
-          }
-        })
-      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' })
-      els.forEach((el) => io.observe(el))
-    })
-    return () => window.cancelAnimationFrame(id)
-  }, [])
   return <>{children}</>
 }

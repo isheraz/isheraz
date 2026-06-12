@@ -17,8 +17,10 @@ export function Nav() {
   const { t, toggleTheme } = useTheme()
   const theme = t.dark ? 'dark' : 'light'
   const [open, setOpen] = React.useState(false)
+  const [mounted, setMounted] = React.useState(false)
 
   React.useEffect(() => {
+    setMounted(true)
     const onHash = () => setOpen(false)
     window.addEventListener('hashchange', onHash)
     return () => window.removeEventListener('hashchange', onHash)
@@ -48,7 +50,7 @@ export function Nav() {
             <Mail size={14} />
           </a>
           <button className="icon-btn" onClick={toggleTheme} aria-label="Toggle theme">
-            {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
+            {mounted ? (theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />) : <span style={{ width: 14, height: 14, display: 'inline-block' }} />}
           </button>
           <a className="btn btn-accent" href="#hire" style={{ marginLeft: 4 }}>
             Hire me <Arrow size={13} />

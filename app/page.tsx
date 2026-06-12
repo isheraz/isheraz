@@ -1,4 +1,3 @@
-import { ThemeProvider, ScrollRevealProvider } from '@/components/providers'
 import { Nav } from '@/components/nav'
 import { Footer } from '@/components/footer'
 import { Hero } from '@/components/hero'
@@ -11,6 +10,9 @@ import { GitHubSection } from '@/components/github'
 import { Newsletter } from '@/components/newsletter'
 import { About } from '@/components/about'
 import { TweaksPanel, TweakSection, TweakColor, TweakRadio } from '@/components/tweaks-panel'
+import { ScrollAnimations } from '@/components/animations/scroll-animations'
+import { HeroAnimations } from '@/components/animations/hero-animations'
+import { CardInteractions } from '@/components/animations/card-interactions'
 
 export default async function App() {
   const jsonLd = {
@@ -26,26 +28,30 @@ export default async function App() {
   }
 
   return (
-    <ThemeProvider>
-      <ScrollRevealProvider>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <Nav />
-        <main>
-          <Hero />
-          <NowStrip />
-          <div className="reveal"><Projects /></div>
-          <div className="reveal"><Essays /></div>
-          <div className="reveal"><Hire /></div>
-          <div className="reveal"><Education /></div>
-          <div className="reveal"><GitHubSection /></div>
-          <div className="reveal"><Newsletter /></div>
-          <div className="reveal"><About /></div>
-        </main>
-        <Footer />
-      </ScrollRevealProvider>
-    </ThemeProvider>
+    <>
+      {/* GSAP animation orchestrators — these render no visible DOM,
+          they just register ScrollTrigger timelines and interactions */}
+      <HeroAnimations />
+      <ScrollAnimations />
+      <CardInteractions />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Nav />
+      <main>
+        <Hero />
+        <NowStrip />
+        <div data-gsap-section="projects"><Projects /></div>
+        <div data-gsap-section="essays"><Essays /></div>
+        <div data-gsap-section="hire"><Hire /></div>
+        <div data-gsap-section="education"><Education /></div>
+        <div data-gsap-section="github"><GitHubSection /></div>
+        <div data-gsap-section="newsletter"><Newsletter /></div>
+        <div data-gsap-section="about"><About /></div>
+      </main>
+      <Footer />
+    </>
   )
 }
