@@ -119,52 +119,76 @@ export function HeroAnimations() {
 
         const wordSpans = h1.querySelectorAll('.hero-word')
         // Set initial state then animate
-        gsap.set(wordSpans, { y: 20, opacity: 0 })
-        tl.to(wordSpans, {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          stagger: 0.04,
-          ease: 'power3.out',
-        }, 0.4)
+        if (wordSpans.length > 0) {
+          gsap.set(wordSpans, { y: 20, opacity: 0 })
+          tl.to(wordSpans, {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            stagger: 0.04,
+            ease: 'power3.out',
+          }, 0.4)
+        }
       }
 
       // Step 5: Subtitle — fade up
-      tl.fromTo('.hero-sub',
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7 },
-        0.75
-      )
+      const heroSub = document.querySelector('.hero-sub')
+      if (heroSub) {
+        tl.fromTo(heroSub,
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7 },
+          0.75
+        )
+      }
 
       // Step 6: CTA buttons — stagger in
-      .fromTo('.hero-cta .btn',
-        { y: 15, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5, stagger: 0.08 },
-        0.9
-      )
-      // Make the CTA container visible
-      .set('.hero-cta', { opacity: 1 }, 0.9)
+      const heroCta = document.querySelector('.hero-cta')
+      const heroBtns = document.querySelectorAll('.hero-cta .btn')
+      if (heroBtns.length > 0) {
+        tl.fromTo(heroBtns,
+          { y: 15, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.5, stagger: 0.08 },
+          0.9
+        )
+      }
+      if (heroCta) {
+        tl.set(heroCta, { opacity: 1 }, 0.9)
+      }
 
       // Step 7: Meta stats — subtle slide up
-      .fromTo('.hero-meta',
-        { y: 10, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6 },
-        1.05
-      )
+      const heroMeta = document.querySelector('.hero-meta')
+      if (heroMeta) {
+        tl.fromTo(heroMeta,
+          { y: 10, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6 },
+          1.05
+        )
+      }
 
       // Step 8: Stat card (split variant)
-      .fromTo('.hero-stat',
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6 },
-        0.95
-      )
+      const heroStat = document.querySelector('.hero-stat')
+      if (heroStat) {
+        tl.fromTo(heroStat,
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6 },
+          0.95
+        )
+      }
 
       // Step 9: Dust canvas fade in
-      .fromTo('.hero-light-dust',
-        { opacity: 0 },
-        { opacity: 1, duration: 1.0, ease: 'power1.inOut' },
-        1.1
-      )
+      const dustCanvas = document.querySelector('.hero-light-dust')
+      if (dustCanvas) {
+        tl.fromTo(dustCanvas,
+          { opacity: 0 },
+          { opacity: 1, duration: 1.0, ease: 'power1.inOut' },
+          1.1
+        )
+      }
+
+      // Step 10: Allow hover effects after animation
+      tl.call(() => {
+        h1?.classList.add('hero-ready')
+      })
 
       // After hero entrance, set up parallax for hero elements on scroll
       ScrollTrigger.create({
