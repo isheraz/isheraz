@@ -151,10 +151,12 @@ function HeroCopy({ siteSettings = null, consultingTiers = [] }: { siteSettings?
         {isAvailable && <span className="pulse"></span>}
         {isAvailable ? `Open for ${totalSlots} consulting slot${totalSlots > 1 ? 's' : ''}` : 'Fully booked'} · Q{quarter} {year}
       </span>
-      <h1>
-        Software Architect.<br />
-        AI product builder.<br />
-        <em>{yearsShipping} years in. The syntax changes. The artistry doesn't.</em>
+      <h1 aria-label={`Software Architect. AI product builder. ${yearsShipping} years in. The syntax changes. The artistry doesn't.`}>
+        {'Software Architect.'.split(/(\s+)/).map((w,i) => /^\s+$/.test(w) || w==='' ? w : <span key={`a${i}`} className="hero-word" style={{display:'inline-block',opacity:0}}>{w}</span>)}<br />
+        {'AI product builder.'.split(/(\s+)/).map((w,i) => /^\s+$/.test(w) || w==='' ? w : <span key={`b${i}`} className="hero-word" style={{display:'inline-block',opacity:0}}>{w}</span>)}<br />
+        <em>
+          {`${yearsShipping} years in. The syntax changes. The artistry doesn't.`.split(/(\s+)/).map((w,i) => /^\s+$/.test(w) || w==='' ? w : <span key={`c${i}`} className="hero-word" style={{display:'inline-block',opacity:0}}>{w}</span>)}
+        </em>
       </h1>
       <p className="hero-sub">
         I&rsquo;m <strong>Sheraz</strong>. I architect and ship full-stack, cloud-native, and AI-powered products at scale &mdash; from pre-seed startups to government systems. Currently building <strong>Chasyr</strong> (AI voice agents for invoice recovery) and advising the <strong>Punjab Government</strong> on AI in special-needs education.

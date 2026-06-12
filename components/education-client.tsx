@@ -31,7 +31,7 @@ export function EducationClient({ education = [] }: { education?: any[] }) {
             const Ico = icons[t]
             const count = education.filter((e) => e.type === typeMap[t]).length
             return (
-              <button key={t} className="edu-tab" onClick={() => setTab(t)} role="tab" aria-pressed={tab === t}>
+              <button key={t} className="edu-tab" onClick={() => setTab(t)} role="tab" aria-selected={tab === t}>
                 <Ico /> {t} <span className="count">{count}</span>
               </button>
             )

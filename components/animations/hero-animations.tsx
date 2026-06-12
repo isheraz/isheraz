@@ -76,45 +76,9 @@ export function HeroAnimations() {
       )
 
       // Step 4: Headline — word-by-word reveal
-      // We manually split the headline into words for animation since
-      // SplitText requires a separate import/registration
-      // Instead, we use a DOM TreeWalker to safely wrap individual words
-      // in spans without breaking nested HTML tags like <em>, <br>, etc.
+      // Text is pre-split into .hero-word spans by React to avoid forced reflows.
       const h1 = hero.querySelector('h1')
       if (h1) {
-        const ariaLabel = h1.textContent || ''
-
-        // Walk all text nodes inside the h1 and wrap each word in a span
-        const walker = document.createTreeWalker(h1, NodeFilter.SHOW_TEXT, null)
-        const textNodes: Text[] = []
-        let node: Text | null
-        while ((node = walker.nextNode() as Text | null)) {
-          if (node.textContent && node.textContent.trim()) {
-            textNodes.push(node)
-          }
-        }
-
-        // Process each text node: split into words and wrap in spans
-        textNodes.forEach(textNode => {
-          const words = textNode.textContent!.split(/(\s+)/)
-          const fragment = document.createDocumentFragment()
-          words.forEach(word => {
-            if (/^\s+$/.test(word) || word === '') {
-              // Preserve whitespace as-is
-              fragment.appendChild(document.createTextNode(word))
-            } else {
-              const span = document.createElement('span')
-              span.className = 'hero-word'
-              span.style.display = 'inline-block'
-              span.style.opacity = '0'
-              span.textContent = word
-              fragment.appendChild(span)
-            }
-          })
-          textNode.parentNode!.replaceChild(fragment, textNode)
-        })
-
-        h1.setAttribute('aria-label', ariaLabel)
         h1.style.opacity = '1'
 
         const wordSpans = h1.querySelectorAll('.hero-word')

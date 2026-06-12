@@ -44,7 +44,8 @@ export function EssaysClient({ essays }: { essays: any[] }) {
               <button
                 key={filter}
                 className="essay-filter"
-                aria-pressed={filter === activeFilter}
+                role="tab"
+                aria-selected={filter === activeFilter}
                 onClick={() => handleFilterChange(filter)}
               >
                 {filter}
@@ -94,13 +95,14 @@ export function EssaysClient({ essays }: { essays: any[] }) {
                   aria-label={`Go to page ${page}`}
                   aria-current={page === currentPage ? 'page' : undefined}
                   style={{
-                    width: '8px',
-                    height: '8px',
+                    width: '32px',
+                    height: '32px',
+                    padding: '12px',
+                    backgroundClip: 'content-box',
                     borderRadius: '50%',
                     border: 'none',
                     background: page === currentPage ? 'var(--accent)' : 'var(--fg-4)',
                     cursor: 'pointer',
-                    padding: 0,
                     transition: 'all .2s',
                     opacity: page === currentPage ? 1 : 0.4
                   }}

@@ -78,7 +78,7 @@ export function HireClient({ tiers = [] }: { tiers?: any[] }) {
                 </a>
               )}
               {typeof t.inventory_available === 'number' && t.inventory_available > 0 && (
-                <div style={{ textAlign: 'center', marginTop: 12, fontSize: 13, color: 'var(--accent)' }}>
+                <div style={{ textAlign: 'center', marginTop: 12, fontSize: 13, color: 'var(--accent-text)' }}>
                   Only {t.inventory_available} spots remaining
                 </div>
               )}

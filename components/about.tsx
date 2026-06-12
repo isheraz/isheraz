@@ -29,7 +29,7 @@ export async function About() {
       <p><strong>Sheraz Ahmed.</strong> Solutions Architect, engineering leader, AI product builder. I've been shipping software for 11+ years — from CodeIgniter backends serving 100K OTT users at TV2U, to 25-project portfolios at InvoZone, to architecting AI voice agents for Australian SMBs at 9T5 / Sociabletech.</p>
       <p>I was an early adopter of AI-assisted development and have spent the past two years embedding AI tools — voice agents, LLMs, RAG pipelines, autonomous outreach — into production products and engineering teams. Currently leading architecture for <strong>Chasyr</strong> and <strong>Adjudication.io</strong>, consulting the <strong>Punjab Government</strong> pro-bono on AI for special-needs education, and building <strong>Cadence</strong> solo on weekends.</p>
       <p>My philosophy: <em>good code is an art form — and with AI filling the knowledge gap, that's more true than ever.</em> AI doesn't replace the engineer; it removes the knowledge ceiling. Craftsmanship matters more now, not less.</p>
-      <p style={{ marginTop: 28 }}>Want to talk? <a href="mailto:sherazahmdd@gmail.com" style={{ color: 'var(--accent)', borderBottom: '1px solid' }}>sherazahmdd@gmail.com</a> · <a href="https://github.com/isheraz" target="_blank" rel="noreferrer" style={{ color: 'var(--accent)', borderBottom: '1px solid' }}>@isheraz</a></p>
+      <p style={{ marginTop: 28 }}>Want to talk? <a href="mailto:sherazahmdd@gmail.com" style={{ color: 'var(--accent-text)', borderBottom: '1px solid' }}>sherazahmdd@gmail.com</a> · <a href="https://github.com/isheraz" target="_blank" rel="noreferrer" style={{ color: 'var(--accent-text)', borderBottom: '1px solid' }}>@isheraz</a></p>
     </>
   )
 

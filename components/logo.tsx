@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
 
 interface LogoProps {
   size?: number
@@ -19,14 +20,16 @@ export function Logo({ size = 32, variant = 'default' }: LogoProps) {
       display: 'grid',
       justifyContent: 'center'
     }}>
-      <img 
+      <Image 
         src="/photo-logo.png" 
         alt="Logo" 
+        width={size}
+        height={size}
+        quality={90}
         style={{ 
           width: '100%', 
           height: '100%', 
           objectFit: 'contain',
-          // filter: 'grayscale(100%) contrast(1.1)',
           display: 'block',
           transform: 'scale(1.2)',
           transformOrigin: 'top center'
@@ -39,7 +42,7 @@ export function Logo({ size = 32, variant = 'default' }: LogoProps) {
 export function LogoText({ size = 28 }: { size?: number }) {
   return (
     <div className="logo-text" style={{ fontSize: size * 0.8 }}>
-      <span style={{ color: '#8ec052', fontWeight: 700, letterSpacing: '-0.02em' }}>
+      <span style={{ color: 'var(--accent-text)', fontWeight: 700, letterSpacing: '-0.02em' }}>
         Sheraz
       </span>
     </div>

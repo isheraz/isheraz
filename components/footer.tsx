@@ -31,7 +31,7 @@ export async function Footer() {
             </p>
           </div>
           <div>
-            <h4>Site</h4>
+            <h3>Site</h3>
             <ul>
               <li><a href="#essays">Essays</a></li>
               <li><a href="#projects">Projects</a></li>
@@ -41,7 +41,7 @@ export async function Footer() {
             </ul>
           </div>
           <div>
-            <h4>Elsewhere</h4>
+            <h3>Elsewhere</h3>
             <ul>
               <li><a href="https://github.com/isheraz" target="_blank" rel="noreferrer">GitHub ↗</a></li>
               <li><a href="https://linkedin.com/in/isheraz" target="_blank" rel="noreferrer">LinkedIn ↗</a></li>
@@ -50,7 +50,7 @@ export async function Footer() {
             </ul>
           </div>
           <div>
-            <h4>Ventures</h4>
+            <h3>Ventures</h3>
             <ul>
               {projects.map((p: any) => (
                 <li key={p.id}>
