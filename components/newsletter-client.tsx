@@ -6,8 +6,10 @@ import { subscribeToNewsletter } from '@/app/actions'
 export function NewsletterClient({ subscriberCount = 0 }: { subscriberCount?: number }) {
   const [status, setStatus] = useState<string | null>(null)
   const targetCount = 100
-  const progressPercent = Math.min((subscriberCount / targetCount) * 100, 100)
-  const spotsRemaining = Math.max(targetCount - subscriberCount, 0)
+  const [localCount, setLocalCount] = useState(subscriberCount)
+
+  const progressPercent = Math.min((localCount / targetCount) * 100, 100)
+  const spotsRemaining = Math.max(targetCount - localCount, 0)
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -20,6 +22,11 @@ export function NewsletterClient({ subscriberCount = 0 }: { subscriberCount?: nu
     } else {
       setStatus(result?.message || 'Success!')
       form.reset()
+      
+      // If it wasn't already subscribed, increment locally for immediate feedback
+      if (result?.message !== 'You are already subscribed!') {
+        setLocalCount(prev => prev + 1)
+      }
     }
   }
 
@@ -42,7 +49,7 @@ export function NewsletterClient({ subscriberCount = 0 }: { subscriberCount?: nu
               <div className="news-progress-fill" style={{ width: `${progressPercent}%` }}></div>
             </div>
             <div className="news-progress-meta">
-              <span><b>{subscriberCount}</b> / {targetCount} early subscribers</span>
+              <span><b>{localCount}</b> / {targetCount} early subscribers</span>
               <span>{Math.round(progressPercent)}%</span>
             </div>
             <div style={{ marginTop: 12, fontSize: 12, color: 'var(--fg-3)', lineHeight: 1.5 }}>
