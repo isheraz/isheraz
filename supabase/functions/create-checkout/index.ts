@@ -1,7 +1,7 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 import Stripe from 'npm:stripe@^14.0.0'
 
-const ALLOWED_ORIGINS = ['http://localhost:3000', 'https://isheraz.com']
+const ALLOWED_ORIGINS = ['http://localhost:3000', 'https://isheraz.com', 'https://www.isheraz.com']
 
 function getCorsHeaders(req: Request) {
   const origin = req.headers.get('Origin')

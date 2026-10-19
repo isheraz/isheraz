@@ -33,11 +33,11 @@ export async function Footer() {
           <div>
             <h3>Site</h3>
             <ul>
-              <li><a href="#essays">Essays</a></li>
-              <li><a href="#projects">Projects</a></li>
-              <li><a href="#hire">Hire me</a></li>
-              <li><a href="#education">Education</a></li>
-              <li><a href="#about">About</a></li>
+              <li><a href="/essays">Essays</a></li>
+              <li><a href="/projects">Projects</a></li>
+              <li><a href="/#hire">Hire me</a></li>
+              <li><a href="/education">Education</a></li>
+              <li><a href="/#about">About</a></li>
             </ul>
           </div>
           <div>

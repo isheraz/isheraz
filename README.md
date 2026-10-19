@@ -2,7 +2,7 @@
 
 A refined, minimal portfolio showcasing 11+ years of shipping full-stack, cloud-native, and AI-powered products at scale—from pre-seed startups to government systems.
 
-**[Visit isheraz.com](https://isheraz.com)** | 💼 [Hire me](https://isheraz.com#hire) | 📧 [sherazahmdd@gmail.com](mailto:sherazahmdd@gmail.com)
+**[Visit isheraz.com](https://www.isheraz.com)** | 💼 [Hire me](https://www.isheraz.com#hire) | 📧 [sherazahmdd@gmail.com](mailto:sherazahmdd@gmail.com)
 
 ---
 
@@ -56,7 +56,7 @@ I architect and ship products that matter. Currently building **Chasyr** (AI voi
 
 ## Essays & Thinking
 
-I write regularly about architecture, AI, and building at scale. Read on [isheraz.com/essays](https://isheraz.com#essays):
+I write regularly about architecture, AI, and building at scale. Read on [isheraz.com/essays](https://www.isheraz.com/essays):
 
 - **Architecture & Systems** — Designing for scale, distributed systems, infrastructure
 - **AI & Agents** — LLMs, agentic workflows, voice systems, vector search
@@ -80,6 +80,20 @@ I write regularly about architecture, AI, and building at scale. Read on [ishera
 - 🐙 **GitHub**: [@isheraz](https://github.com/isheraz)
 - 📱 **Phone**: +92-312-450-1070
 - 📍 **Location**: Lahore, Pakistan (UTC+5)
+
+---
+
+## Environment
+
+Copy `.env.example` to `.env.local`. For analytics, set:
+
+```bash
+NEXT_PUBLIC_GA_MEASUREMENT_ID="G-XXXXXXXX"
+```
+
+That value is read in `app/layout.tsx` and passed to `@next/third-parties/google` `GoogleAnalytics`. It is not hardcoded. After merge, add the same variable in the Vercel project settings (Production, and Preview if you want hits there). In GA Admin, point the web stream URL at `https://www.isheraz.com`.
+
+Cloudflare Web Analytics stays as-is when `NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN` is set.
 
 ---
 

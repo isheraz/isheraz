@@ -6,10 +6,10 @@ import { LogoWordmark } from './logo'
 import { useTheme } from './providers'
 
 const links = [
-  ['Essays', '/#essays'],
+  ['Essays', '/essays'],
   ['Projects', '/#projects'],
   ['Hire me', '/#hire'],
-  ['Education', '/#education'],
+  ['Education', '/education'],
   ['About', '/#about'],
 ]
 
@@ -29,7 +29,7 @@ export function Nav() {
   return (
     <header className={open ? 'nav open' : 'nav'}>
       <div className="shell nav-inner">
-        <a href="#top" className="nav-mark" onClick={() => setOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <a href="/" className="nav-mark" onClick={() => setOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <LogoWordmark size={32} />
         </a>
         <nav className="nav-links" aria-label="primary">
@@ -52,7 +52,7 @@ export function Nav() {
           <button className="icon-btn" onClick={toggleTheme} aria-label="Toggle theme">
             {mounted ? (theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />) : <span style={{ width: 14, height: 14, display: 'inline-block' }} />}
           </button>
-          <a className="btn btn-accent" href="#hire" style={{ marginLeft: 4 }}>
+          <a className="btn btn-accent" href="/#hire" style={{ marginLeft: 4 }}>
             Hire me <Arrow size={13} />
           </a>
           <button
@@ -91,7 +91,7 @@ export function Nav() {
           </a>
         </div>
         <div className="nav-mobile-cta">
-          <a className="btn btn-accent" href="#hire">
+          <a className="btn btn-accent" href="/#hire">
             Hire me <Arrow size={13} />
           </a>
         </div>

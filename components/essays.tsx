@@ -1,9 +1,9 @@
 import { createClient } from '@/utils/supabase/server'
 import { EssaysClient } from './essays-client'
 
-export async function Essays() {
+export async function Essays({ showArchiveLink = false, showAll = false }: { showArchiveLink?: boolean, showAll?: boolean }) {
   const supabase = await createClient()
   const { data: essays } = await supabase.from('essays').select('*').eq('is_published', true).lte('published_at', new Date().toISOString()).order('published_at', { ascending: false })
 
-  return <EssaysClient essays={essays || []} />
+  return <EssaysClient essays={essays || []} showArchiveLink={showArchiveLink} showAll={showAll} />
 }

@@ -1,5 +1,6 @@
 import sanitizeHtml from 'sanitize-html'
 import { createClient } from '@/utils/supabase/server'
+import { countLabel } from '@/utils/formatters'
 
 export async function About() {
   const supabase = await createClient()
@@ -16,12 +17,13 @@ export async function About() {
   
   let openToText = 'Unavailable'
   if ((siteSettings?.is_accepting_projects ?? true) && totalSlots > 0) {
-    const activeTiers = consultingTiers.filter((t: any) => (t.inventory_available || 0) > 0)
-    if (activeTiers.length === 1) {
-      openToText = `${activeTiers[0].inventory_available} ${activeTiers[0].name.toLowerCase()}`
-    } else if (activeTiers.length > 1) {
-      const last = activeTiers.pop()
-      openToText = `${activeTiers.map((t: any) => `${t.inventory_available} ${t.name.toLowerCase()}`).join(', ')} and ${last.inventory_available} ${last.name.toLowerCase()}`
+    const labels = consultingTiers
+      .filter((t: any) => (t.inventory_available || 0) > 0)
+      .map((t: any) => countLabel(t.inventory_available, String(t.name || 'slot').toLowerCase()))
+    if (labels.length === 1) {
+      openToText = labels[0]
+    } else if (labels.length > 1) {
+      openToText = `${labels.slice(0, -1).join(', ')} and ${labels[labels.length - 1]}`
     }
   }
   const defaultBio = (
