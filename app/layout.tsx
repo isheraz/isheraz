@@ -1,15 +1,14 @@
 import type { Metadata } from 'next'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { LoaderWrapper } from '@/components/loader-wrapper'
 import { ThemeProvider } from '@/components/providers'
 import { GSAPProvider } from '@/components/gsap-provider'
 import { MagneticCursor } from '@/components/animations/magnetic-cursor'
+import { SITE_URL, DEFAULT_OG_IMAGE } from '@/lib/site'
 import './globals.css'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://isheraz.com'),
-  alternates: {
-    canonical: '/',
-  },
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'Sheraz Ahmed — Solutions Architect & AI Product Builder',
     template: '%s | Sheraz Ahmed'
@@ -18,25 +17,18 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Sheraz Ahmed — Solutions Architect & AI Product Builder',
     description: 'Sheraz Ahmed — Solutions Architect, engineering leader, AI product builder. Essays, ventures, and consulting.',
-    url: 'https://isheraz.com',
+    url: SITE_URL,
     siteName: 'Sheraz Ahmed',
     locale: 'en_US',
     type: 'website',
-    images: [
-      {
-        url: 'https://isheraz.com/photo-logo.png',
-        width: 1200,
-        height: 630,
-        alt: 'Sheraz Ahmed',
-      }
-    ],
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Sheraz Ahmed — Solutions Architect & AI Product Builder',
     description: 'Sheraz Ahmed — Solutions Architect, engineering leader, AI product builder. Essays, ventures, and consulting.',
     creator: '@sheraz_ahmd',
-    images: ['https://isheraz.com/photo-logo.png'],
+    images: [DEFAULT_OG_IMAGE.url],
   },
   robots: {
     index: true,
@@ -54,6 +46,8 @@ export const metadata: Metadata = {
     apple: '/favicon.png',
   },
 }
+
+const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 
 export default function RootLayout({
   children,
@@ -85,6 +79,7 @@ export default function RootLayout({
           </GSAPProvider>
         </ThemeProvider>
       </body>
+      {gaMeasurementId ? <GoogleAnalytics gaId={gaMeasurementId} /> : null}
     </html>
   )
 }

@@ -5,6 +5,7 @@ import { GitHub, LinkedIn, Arrow } from './icons'
 import { incrementLike } from '@/app/admin/essays/actions'
 import { useGSAPContext } from '@/components/gsap-provider'
 import Link from 'next/link'
+import { absoluteUrl } from '@/lib/site'
 
 export function EssayReader({ essay, relatedEssays = [] }: { essay: any, relatedEssays?: any[] }) {
   const router = useRouter()
@@ -81,7 +82,7 @@ export function EssayReader({ essay, relatedEssays = [] }: { essay: any, related
         ) : (
           <a 
             className="reader-floating-btn"
-            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://isheraz.com/essays/${essay.slug}`)}`} 
+            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(absoluteUrl(`/essays/${essay.slug}`))}`} 
             target="_blank" 
             rel="noreferrer"
             title="Share on LinkedIn"

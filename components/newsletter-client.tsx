@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { Arrow } from './icons'
 import { subscribeToNewsletter } from '@/app/actions'
+import { countLabel } from '@/utils/formatters'
 
 export function NewsletterClient({ subscriberCount = 0 }: { subscriberCount?: number }) {
   const [status, setStatus] = useState<string | null>(null)
@@ -53,7 +54,7 @@ export function NewsletterClient({ subscriberCount = 0 }: { subscriberCount?: nu
               <span>{Math.round(progressPercent)}%</span>
             </div>
             <div style={{ marginTop: 12, fontSize: 12, color: 'var(--fg-3)', lineHeight: 1.5 }}>
-              {spotsRemaining} spots away. When we hit it, the first issue goes out and the form closes for a beat.
+              {countLabel(spotsRemaining, 'spot')} away. When we hit it, the first issue goes out and the form closes for a beat.
             </div>
           </div>
         </div>

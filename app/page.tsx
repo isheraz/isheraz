@@ -1,3 +1,5 @@
+import type { Metadata } from 'next'
+import { SITE_URL } from '@/lib/site'
 import { Nav } from '@/components/nav'
 import { Footer } from '@/components/footer'
 import { Hero } from '@/components/hero'
@@ -14,12 +16,18 @@ import { ScrollAnimations } from '@/components/animations/scroll-animations'
 import { HeroAnimations } from '@/components/animations/hero-animations'
 import { CardInteractions } from '@/components/animations/card-interactions'
 
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+}
+
 export default async function App() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'Sheraz Ahmed',
-    url: 'https://isheraz.com',
+    url: SITE_URL,
     jobTitle: 'Solutions Architect & AI Product Builder',
     sameAs: [
       'https://github.com/isheraz',
@@ -44,9 +52,9 @@ export default async function App() {
         <Hero />
         <NowStrip />
         <div data-gsap-section="projects"><Projects /></div>
-        <div data-gsap-section="essays"><Essays /></div>
+        <div data-gsap-section="essays"><Essays showArchiveLink /></div>
         <div data-gsap-section="hire"><Hire /></div>
-        <div data-gsap-section="education"><Education /></div>
+        <div data-gsap-section="education"><Education showArchiveLink /></div>
         <div data-gsap-section="github"><GitHubSection /></div>
         <div data-gsap-section="newsletter"><Newsletter /></div>
         <div data-gsap-section="about"><About /></div>

@@ -3,17 +3,20 @@ import { ProjectsClient } from './projects-client'
 import { Nav } from '@/components/nav'
 import { Footer } from '@/components/footer'
 import { Metadata } from 'next'
+import { absoluteUrl, DEFAULT_OG_IMAGE } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'All Projects & Ventures',
   description: 'A complete archive of ventures, products, and case studies I\'ve worked on over the years.',
   alternates: {
-    canonical: '/projects'
+    canonical: absoluteUrl('/projects'),
   },
   openGraph: {
     title: 'All Projects & Ventures | Sheraz Ahmed',
     description: 'A complete archive of ventures, products, and case studies I\'ve worked on over the years.',
-    url: 'https://isheraz.com/projects',
+    url: absoluteUrl('/projects'),
+    siteName: 'Sheraz Ahmed',
+    images: [DEFAULT_OG_IMAGE],
   }
 }
 

@@ -2,9 +2,9 @@
 import { useState } from 'react'
 import { EDU, EDU_ALL } from '@/lib/data'
 import Link from 'next/link'
-import { Tutorial, Talk, Resource } from './icons'
+import { Tutorial, Talk, Resource, ArrowUpRight } from './icons'
 
-export function EducationClient({ education = [] }: { education?: any[] }) {
+export function EducationClient({ education = [], showArchiveLink = false, showAll = false }: { education?: any[], showArchiveLink?: boolean, showAll?: boolean }) {
   const [tab, setTab] = useState('Tutorials')
   const icons: any = { Tutorials: Tutorial, Talks: Talk, Resources: Resource }
   
@@ -14,7 +14,7 @@ export function EducationClient({ education = [] }: { education?: any[] }) {
     'Resources': 'resource'
   }
   
-  const items = education.filter((e) => e.type === typeMap[tab])
+  const items = showAll ? education : education.filter((e) => e.type === typeMap[tab])
 
   return (
     <section id="education">
@@ -22,11 +22,20 @@ export function EducationClient({ education = [] }: { education?: any[] }) {
         <div className="section-head">
           <div>
             <div className="section-eyebrow">Education / Learning</div>
-            <h2 className="section-title">What I'm teaching — and what I send to engineers I mentor.</h2>
+            {showAll ? (
+              <h1 className="section-title">What I'm teaching — and what I send to engineers I mentor.</h1>
+            ) : (
+              <h2 className="section-title">What I'm teaching — and what I send to engineers I mentor.</h2>
+            )}
             <p className="section-sub">Tutorials I've written, talks I've given, and the resource lists I'd hand a younger version of myself.</p>
+            {showArchiveLink && (
+              <Link className="section-link" href="/education" style={{ marginTop: 16 }}>
+                All education <ArrowUpRight size={13} />
+              </Link>
+            )}
           </div>
         </div>
-        <div className="edu-tabs" role="tablist">
+        {!showAll && <div className="edu-tabs" role="tablist">
           {['Tutorials', 'Talks', 'Resources'].map(t => {
             const Ico = icons[t]
             const count = education.filter((e) => e.type === typeMap[t]).length
@@ -36,7 +45,7 @@ export function EducationClient({ education = [] }: { education?: any[] }) {
               </button>
             )
           })}
-        </div>
+        </div>}
         <div className="edu-grid">
           {items.map((it: any) => {
             const strippedDesc = typeof it.description === 'string' 

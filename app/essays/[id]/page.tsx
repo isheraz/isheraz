@@ -2,26 +2,43 @@ import { createClient } from '@/utils/supabase/server'
 import { EssayReader } from '@/components/essay-reader'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
+import { SITE_URL, absoluteUrl, DEFAULT_OG_IMAGE } from '@/lib/site'
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id: slug } = await params
   const supabase = await createClient()
-  const { data: essay } = await supabase.from('essays').select('title, summary').eq('slug', slug).eq('is_published', true).lte('published_at', new Date().toISOString()).single()
-  
+  const { data: essay } = await supabase
+    .from('essays')
+    .select('title, subtitle')
+    .eq('slug', slug)
+    .eq('is_published', true)
+    .lte('published_at', new Date().toISOString())
+    .single()
+
   if (!essay) return {}
+
+  const description = essay.subtitle || 'An essay by Sheraz Ahmed'
+  const url = absoluteUrl(`/essays/${slug}`)
 
   return {
     title: essay.title,
-    description: essay.summary || `An essay by Sheraz Ahmed`,
+    description,
     alternates: {
-      canonical: `/essays/${slug}`
+      canonical: url,
     },
     openGraph: {
       title: essay.title,
-      description: essay.summary || `An essay by Sheraz Ahmed`,
+      description,
       type: 'article',
-      url: `https://isheraz.com/essays/${slug}`
-    }
+      url,
+      siteName: 'Sheraz Ahmed',
+      images: [DEFAULT_OG_IMAGE],
+    },
+    twitter: {
+      title: essay.title,
+      description,
+      images: [DEFAULT_OG_IMAGE.url],
+    },
   }
 }
 
@@ -43,14 +60,14 @@ export default async function EssayPage({ params }: { params: Promise<{ id: stri
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: essay.title,
-    description: essay.summary || `An essay by Sheraz Ahmed`,
+    description: essay.subtitle || 'An essay by Sheraz Ahmed',
     author: {
       '@type': 'Person',
       name: 'Sheraz Ahmed',
-      url: 'https://isheraz.com'
+      url: SITE_URL
     },
     datePublished: essay.published_at || essay.created_at,
-    url: `https://isheraz.com/essays/${slug}`
+    url: absoluteUrl(`/essays/${slug}`)
   }
 
   const { data: relatedEssays } = await supabase

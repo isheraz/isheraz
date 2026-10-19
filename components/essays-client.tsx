@@ -1,8 +1,9 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
+import { ArrowUpRight } from './icons'
 
-export function EssaysClient({ essays }: { essays: any[] }) {
+export function EssaysClient({ essays, showArchiveLink = false, showAll = false }: { essays: any[], showArchiveLink?: boolean, showAll?: boolean }) {
   const [activeFilter, setActiveFilter] = useState('All')
   const [currentPage, setCurrentPage] = useState(1)
   const filters = ['All', 'Technical', 'Personal', 'Religious']
@@ -14,7 +15,7 @@ export function EssaysClient({ essays }: { essays: any[] }) {
 
   const totalPages = Math.ceil(filteredEssays.length / essaysPerPage)
   const startIdx = (currentPage - 1) * essaysPerPage
-  const paginatedEssays = filteredEssays.slice(startIdx, startIdx + essaysPerPage)
+  const paginatedEssays = showAll ? filteredEssays : filteredEssays.slice(startIdx, startIdx + essaysPerPage)
 
   const handleFilterChange = (filter: string) => {
     setActiveFilter(filter)
@@ -36,8 +37,17 @@ export function EssaysClient({ essays }: { essays: any[] }) {
         <div className="section-head">
           <div>
             <div className="section-eyebrow">Essays / Writing</div>
-            <h2 className="section-title">Notes on building, faith, and the work.</h2>
+            {showAll ? (
+              <h1 className="section-title">Notes on building, faith, and the work.</h1>
+            ) : (
+              <h2 className="section-title">Notes on building, faith, and the work.</h2>
+            )}
             <p className="section-sub">Technical deep-dives, personal field notes, and reflections from a Muslim engineer in Lahore. Long-form, no listicles.</p>
+            {showArchiveLink && (
+              <Link className="section-link" href="/essays" style={{ marginTop: 16 }}>
+                All essays <ArrowUpRight size={13} />
+              </Link>
+            )}
           </div>
           <div className="essay-filters" role="tablist" aria-label="Essay categories">
             {filters.map(filter => (
@@ -69,7 +79,7 @@ export function EssaysClient({ essays }: { essays: any[] }) {
             )
           })}
         </div>
-        {totalPages > 1 && (
+        {!showAll && totalPages > 1 && (
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', marginTop: '32px', paddingTop: '32px', borderTop: '1px solid var(--border)', alignItems: 'center' }}>
             <button
               onClick={() => goToPage(currentPage - 1)}

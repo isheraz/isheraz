@@ -10,6 +10,25 @@ export function formatRelativeDate(isoDateString?: string | null): string {
   return `${diffDays} days ago`
 }
 
+/** Pluralize the last word: "strategy call" → "strategy calls". */
+export function pluralizePhrase(phrase: string): string {
+  const parts = phrase.trim().split(/\s+/)
+  if (!parts[0]) return phrase
+  const last = parts[parts.length - 1]
+  if (/s$/i.test(last)) return parts.join(' ')
+  if (/[^aeiou]y$/i.test(last)) {
+    parts[parts.length - 1] = `${last.slice(0, -1)}ies`
+  } else {
+    parts[parts.length - 1] = `${last}s`
+  }
+  return parts.join(' ')
+}
+
+export function countLabel(count: number, singular: string): string {
+  const phrase = singular.trim() || 'item'
+  return `${count} ${count === 1 ? phrase : pluralizePhrase(phrase)}`
+}
+
 export function parseSideBets(sideBetsRaw?: string | null): { number: string, text: string } {
   const fallback = { number: '4', text: ' AI ventures in flight' }
   if (!sideBetsRaw) return fallback

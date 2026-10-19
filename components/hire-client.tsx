@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { Check, Arrow } from './icons'
 import { createClient } from '@/utils/supabase/client'
+import { countLabel } from '@/utils/formatters'
 
 export function HireClient({ tiers = [] }: { tiers?: any[] }) {
   const [loading, setLoading] = useState<string | null>(null)
@@ -79,7 +80,7 @@ export function HireClient({ tiers = [] }: { tiers?: any[] }) {
               )}
               {typeof t.inventory_available === 'number' && t.inventory_available > 0 && (
                 <div style={{ textAlign: 'center', marginTop: 12, fontSize: 13, color: 'var(--accent-text)' }}>
-                  Only {t.inventory_available} spots remaining
+                  Only {countLabel(t.inventory_available, 'spot')} remaining
                 </div>
               )}
               {t.inventory_available === 0 && (

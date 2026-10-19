@@ -2,23 +2,42 @@ import EducationDetail from '@/components/education-detail'
 import { createClient } from '@/utils/supabase/server'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
+import { absoluteUrl, plainText, DEFAULT_OG_IMAGE } from '@/lib/site'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const supabase = await createClient()
-  const { data: item } = await supabase.from('education').select('title, school').eq('slug', slug).eq('is_published', true).single()
-  
+  const { data: item } = await supabase
+    .from('education')
+    .select('title, description')
+    .eq('slug', slug)
+    .eq('is_published', true)
+    .single()
+
   if (!item) return {}
 
+  const description = plainText(item.description) || item.title
+  const url = absoluteUrl(`/education/${slug}`)
+
   return {
-    title: `${item.title} at ${item.school}`,
-    description: `Details about my education and degree: ${item.title} from ${item.school}.`,
+    title: item.title,
+    description,
+    alternates: {
+      canonical: url,
+    },
     openGraph: {
-      title: `${item.title} at ${item.school} | Sheraz Ahmed`,
-      description: `Details about my education and degree: ${item.title} from ${item.school}.`,
+      title: item.title,
+      description,
       type: 'article',
-      url: `https://isheraz.com/education/${slug}`
-    }
+      url,
+      siteName: 'Sheraz Ahmed',
+      images: [DEFAULT_OG_IMAGE],
+    },
+    twitter: {
+      title: item.title,
+      description,
+      images: [DEFAULT_OG_IMAGE.url],
+    },
   }
 }
 
@@ -45,18 +64,14 @@ export default async function EducationPage({ params }: { params: Promise<{ slug
     .eq('is_published', true)
     .order('sort_order', { ascending: true })
 
-  const jsonLd = {
+  const description = plainText(item.description)
+  const jsonLd: Record<string, unknown> = {
     '@context': 'https://schema.org',
-    '@type': 'EducationalOccupationalProgram',
+    '@type': 'LearningResource',
     name: item.title,
-    provider: {
-      '@type': 'EducationalOrganization',
-      name: item.school
-    },
-    timeToComplete: 'P4Y',
-    educationalCredentialAwarded: item.title,
-    url: `https://isheraz.com/education/${slug}`
+    url: absoluteUrl(`/education/${slug}`),
   }
+  if (description) jsonLd.description = description
 
   return (
     <>
