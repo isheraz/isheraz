@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { LoaderWrapper } from '@/components/loader-wrapper'
 import { ThemeProvider } from '@/components/providers'
@@ -80,6 +81,11 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
       {gaMeasurementId ? <GoogleAnalytics gaId={gaMeasurementId} /> : null}
+      <Script
+        src="https://huxton-collector-1040079170895.us-central1.run.app/h.js?s=hx_KY6kAVqUOd6pJAAo"
+        strategy="afterInteractive"
+        async
+      />
     </html>
   )
 }
